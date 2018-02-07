@@ -3,11 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">  
 <configuration>  
     <typeAliases>  
-      <typeAlias alias="user" type="com.forrest.model.User"/>   
+      <typeAlias alias="user" type="com.forrest.model.User"/> 
+      <typeAlias alias="restaurant" type="com.forrest.model.Restaurant"/>  
+      <typeAlias alias="cityInfo" type="com.forrest.model.CityInfo"/>
+      <typeAlias alias="cookStyle" type="com.forrest.model.CookStyle"/>
    </typeAliases>    
    <mappers>  
        <mapper resource="mapper/UserMapper.xml"/>  
-       
+       <mapper resource="mapper/RestoMapper.xml"/>
+       <mapper resource="mapper/CityInfoMapper.xml"/>
+       <mapper resource="mapper/CookStyleMapper.xml"/>
    </mappers>  
    
 </configuration> 
