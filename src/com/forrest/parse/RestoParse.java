@@ -33,14 +33,18 @@ public class RestoParse {
 			String commentNum = ele.select("div[class=txt]").select("div[class=comment]").select("span").attr("title");
 			String statcont = ele.select("div[class=txt]").select("div[class=comment]").select("a[class=review-num]")
 					.select("b").text();
-			String address = ele.select("div[class=txt]").select("div[class=tag-addr]").select("span").text();
-			String consumptionPerPerson = ele.select("div[class=txt]").select("div[class=comment]")
-					.select("a[class=mean-price]").text();
+			String address = ele.select("div[class=txt]").select("div[class=tag-addr]").select("span[class=addr]").text();
+			String consumptionPerPerson = "-1";
+			String tt = ele.select("div[class=txt]").select("div[class=comment]")
+					.select("a[class=mean-price]").select("b").text();
+			if (tt.length() > 0) {
+				consumptionPerPerson = tt.substring(1);
+			}
 
 			Restaurant restaurant = new Restaurant();
 			restaurant.setName(name);
 			restaurant.setCommentNum(commentNum);
-			restaurant.setImage(ImageUtils.saveToFile(image));
+			restaurant.setImage(ImageUtils.saveToFile(image,rid));
 			restaurant.setStatcont(statcont);
 			restaurant.setAddress(address);
 			restaurant.setConsumptionPerPerson(consumptionPerPerson);

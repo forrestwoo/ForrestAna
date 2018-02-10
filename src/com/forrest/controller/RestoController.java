@@ -36,34 +36,45 @@ public class RestoController {
 	@RequestMapping("/addRestos")
 	public String addRestos() throws Exception {
 		HttpClient client = HttpClients.createDefault();
-		
-		//http://www.dianping.com/beijing/ch10/g251
+
+		// http://www.dianping.com/beijing/ch10/g251
 		String rootUrlString = "http://www.dianping.com/";
-//		String rootUrlString = "http://www.dianping.com/beijing/ch10/g251";
+		// String rootUrlString = "http://www.dianping.com/beijing/ch10/g251";
 
 		String urlString = "";
-		
 
-		List<String> cities = cityInfoDao.selectCities();
+		/*
+		 * String temp = "http://www.dianping.com/chengde/ch10/"; List<String> cates =
+		 * cookStyleDao.selectCookStyles(); for (int j = 9; j < cates.size(); j++) {
+		 * urlString=temp + cates.get(j); int pages = ForrestUtils.getPageCount(client,
+		 * urlString); if (pages < 1) { continue; } for (int k = 1; k < pages + 1; k++)
+		 * { String urlString1 = urlString + "p" +k; List<Restaurant> list =
+		 * RestoParse.getData(client, urlString1); System.out.println("url e......" +
+		 * urlString1);
+		 * 
+		 * if (list.size() > 0) { restaurantDao.insertRestos(list); } } }
+		 */
+
+		List<String> cities = new ArrayList<>();
+		cities.add("tianjin");
+		cities.add("nanjing");
 
 		List<String> cates = cookStyleDao.selectCookStyles();
-		
-		
+
 		for (int i = 0; i < cities.size(); i++) {
-//			if (cates.get(i) == "shanghai") {
-//				continue;
-//			}
-		String	temp = rootUrlString + cities.get(i) + "/ch10/";
-			
+			String temp = rootUrlString + cities.get(i) + "/ch10/";
+
 			for (int j = 0; j < cates.size(); j++) {
-				urlString=temp + cates.get(j);
+				urlString = temp + cates.get(j);
 				int pages = ForrestUtils.getPageCount(client, urlString);
 				if (pages < 1) {
 					continue;
 				}
 				for (int k = 1; k < pages + 1; k++) {
-					String urlString1 = urlString + "p" +k;
+					String urlString1 = urlString + "p" + k;
 					List<Restaurant> list = RestoParse.getData(client, urlString1);
+					System.out.println("url e......" + urlString1);
+
 					if (list.size() > 0) {
 						restaurantDao.insertRestos(list);
 					}

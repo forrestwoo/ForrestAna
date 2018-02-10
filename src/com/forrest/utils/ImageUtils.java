@@ -16,7 +16,7 @@ import org.apache.ibatis.jdbc.Null;
 public class ImageUtils {
 	private static int count = 0;
 
-	public static String saveToFile(String imageUrl) {
+	public static String saveToFile(String imageUrl,String path) {
 		FileOutputStream fileOutputStream = null;
 		BufferedInputStream bis = null;
 		HttpURLConnection httpURL = null;
@@ -29,25 +29,18 @@ public class ImageUtils {
 		try {
 
 			url = new URL(imageUrl);
-//			if (url.getProtocol().equals("https") ) {
-//				httpsURL = (HttpsURLConnection) url.openConnection();
-//				httpsURL.connect();
-//				bis = new BufferedInputStream(httpsURL.getInputStream());
-//
-//			} else if (url.getProtocol().equals("http")) {
-				httpURL = (HttpURLConnection) url.openConnection();
-				httpURL.connect();
-				bis = new BufferedInputStream(httpURL.getInputStream());
 
-//			}
-			File dir = new File("g://images");
+			httpURL = (HttpURLConnection) url.openConnection();
+			httpURL.connect();
+			bis = new BufferedInputStream(httpURL.getInputStream());
+			File dir = new File("g://images" +"/" + path);
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
 			if (imageUrl.indexOf("%") < imageUrl.lastIndexOf("/") + 1)
-				imageName = "g:\\images\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+				imageName = "g:\\images\\" + path + "\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
 			else
-				imageName = "g:\\images\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1, imageUrl.indexOf("%"));
+				imageName = "g:\\images\\" + path + "\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1, imageUrl.indexOf("%"));
 
 			File file = new File(imageName);
 			fileOutputStream = new FileOutputStream(file);
@@ -70,9 +63,8 @@ public class ImageUtils {
 				}
 				if (httpsURL != null) {
 					httpsURL.disconnect();
-				} 
-				if (httpURL != null) 
-				{
+				}
+				if (httpURL != null) {
 					httpURL.disconnect();
 
 				}
@@ -80,6 +72,7 @@ public class ImageUtils {
 				e2.printStackTrace();
 			}
 		}
+		System.out.println("imageName e......" + imageName);
 
 		return imageName;
 	}

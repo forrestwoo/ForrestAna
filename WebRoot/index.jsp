@@ -260,13 +260,17 @@
             <li><a href="pages/layout/collapsed-sidebar.html" menuFrame><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
           </ul>
         </li>
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th"></i> <span>类库管理</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
             </span>
           </a>
+          <ul class="treeview-menu">
+          <li><a href="addlibs" target="menuFrame"><i class="fa fa-circle-o"></i>类库下载</a></li>
+          </ul>
+          
         </li>
       </ul>
       <!-- /.sidebar-menu -->
