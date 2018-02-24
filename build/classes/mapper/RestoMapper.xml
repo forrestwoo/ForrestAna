@@ -4,23 +4,37 @@
 	<select id="selectRestoByID" parameterType="long" resultType="restaurant">
 		select * from restaurant where id = #{id}
 	</select>
+	<update id="updateRestoTele" parameterType="restaurant">
+		update restaurant
+		   <trim prefix="set" suffixOverrides=",">    
+       <if test="tele!=null">  
+        tele= #{tele},  
+       </if> 
+      <if test="businessHours!=null">  
+        businessHours = #{businessHours},  
+     </if>  
+     </trim>
+		where rid=#{rid}
+	</update>
 
-
-	<insert id="insertRestos" parameterType = "java.util.List"  useGeneratedKeys="true">
-	<selectKey resultType="long" keyProperty="id" order="AFTER">
-		SELECT  
-        LAST_INSERT_ID()
-	</selectKey>
-	insert into restaurant (name,statcont,commentNum,address,consumptionPerPerson,image,tele,businessHours,rid,city,source,cate)   
-    values  
-    <foreach collection="list" item="item" index="index" separator="," >  
-        (#{item.name},#{item.statcont},#{item.commentNum},#{item.address},#{item.consumptionPerPerson},
-        #{item.image},#{item.tele},#{item.businessHours},#{item.rid},#{item.city},#{item.source},#{item.cate})  
-    </foreach>
+	<insert id="insertRestos" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into restaurant
+		(name,statcont,commentNum,address,consumptionPerPerson,image,tele,businessHours,rid,city,source,cate)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.name},#{item.statcont},#{item.commentNum},#{item.address},#{item.consumptionPerPerson},
+			#{item.image},#{item.tele},#{item.businessHours},#{item.rid},#{item.city},#{item.source},#{item.cate})
+		</foreach>
 	</insert>
 
-
-<select id="selectRestoId" resultType="java.util.List">
-select id from restaurant
-</select>
+	<select id="selectRidFromResto" resultType="string">
+		select rid 
+		from restaurant 
+	</select>
 </mapper>

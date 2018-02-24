@@ -16,7 +16,6 @@
 	</insert>
 
 	<select id="selectCookStyles" resultType="string">
-		select categorycode from styleofcook where categorycode !='g34032' and categorycode != 'g2714' and categorycode != 'g34014' and categorycode != 'g1338' and
-categorycode != 'g1845'
+		select categorycode from styleofcook where id > 26
 	</select>
 </mapper>

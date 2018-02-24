@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.forrest.dao.CityInfoDao;
 import com.forrest.model.CityInfo;
 import com.forrest.model.Restaurant;
+import com.forrest.parse.BaiduImageParse;
 import com.forrest.parse.CityInfoParse;
 
 @Controller
@@ -24,14 +25,8 @@ public class CityInfoController {
 
 	@RequestMapping("/addCities")
 	public String addCities() throws Exception {
-		HttpClient client = HttpClients.createDefault();
-		String rootUrlString = "http://www.dianping.com/citylist";
+		BaiduImageParse.getImages();
 
-
-			List<CityInfo> list = CityInfoParse.getData(client, rootUrlString);
-			if (list.size() > 0) {
-				cityInfoDao.insertCities(list);
-			}
 
 		return "addCities";
 	}

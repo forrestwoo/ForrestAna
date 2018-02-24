@@ -68,4 +68,19 @@ public class RestoParse {
 
 		return data;
 	}
+	
+	public static String getTeleData(HttpClient client, String url) throws Exception {
+		Document doc = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
+		Elements elements = doc.select("p[class=phone]");
+		
+		if (elements.size() < 1) {
+			return null;
+		}
+		String tele = "";
+		for (Element ele : elements) {
+			tele = ele.select("em").text();
+		}
+		
+		return tele;
+	}
 }

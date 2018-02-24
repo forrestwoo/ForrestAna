@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forrest.mapper.ReviewMapper">
+
+	<insert id="insertReviews" parameterType = "java.util.List"  useGeneratedKeys="true">
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+		SELECT  
+        LAST_INSERT_ID()
+	</selectKey>
+	insert into review (rid,user,content,avatar,imagepath)   
+    values  
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.rid},#{item.user},#{item.content},#{item.avatar},#{item.imagePath})  
+    </foreach>
+	</insert>
+
+</mapper>

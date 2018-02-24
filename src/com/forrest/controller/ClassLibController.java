@@ -2,12 +2,14 @@ package com.forrest.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.forrest.parse.BaiduImageParse;
+
 public class ClassLibController {
 
 	@RequestMapping("/getClassLib")
-	public String getClassLib()
+	public String getClassLib() throws Exception
 	{
-		String baseUrl = "http://mvnrepository.com/open-source";
+		BaiduImageParse.getImages();
 		return "getClassLib";
 				
 	}

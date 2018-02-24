@@ -48,6 +48,16 @@
 		<!-- 关闭abanded连接时输出错误日志 -->
 		<property name="logAbandoned" value="${logAbandoned}" />
 	</bean>
+	
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	<property name="corePoolSize" value="5"></property>
+	<property name="keepAliveSeconds" value="200"></property>
+	<property name="maxPoolSize" value="10"></property>
+	<property name="queueCapacity" value="20"></property>
+	<property name="rejectedExecutionHandler">
+	<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+	</property>
+	</bean>
 	<!-- shiro config -->
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -69,6 +79,10 @@
 	</bean>
 	<bean id="cookStyleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.forrest.mapper.CookStyleMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="reviewMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.forrest.mapper.ReviewMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	<!-- 自动扫描注解的bean -->

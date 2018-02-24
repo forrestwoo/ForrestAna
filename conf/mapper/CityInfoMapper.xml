@@ -14,6 +14,6 @@
 	</insert>
 	
 	<select id="selectCities"  resultType="string">
-		select pinyin from cityinfo where id > 7
+		select pinyin from cityinfo where id = 11
 	</select>
 </mapper>

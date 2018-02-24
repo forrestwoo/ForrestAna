@@ -7,12 +7,14 @@
       <typeAlias alias="restaurant" type="com.forrest.model.Restaurant"/>  
       <typeAlias alias="cityInfo" type="com.forrest.model.CityInfo"/>
       <typeAlias alias="cookStyle" type="com.forrest.model.CookStyle"/>
+      <typeAlias alias="review" type="com.forrest.model.Review"/>
    </typeAliases>    
    <mappers>  
        <mapper resource="mapper/UserMapper.xml"/>  
        <mapper resource="mapper/RestoMapper.xml"/>
        <mapper resource="mapper/CityInfoMapper.xml"/>
        <mapper resource="mapper/CookStyleMapper.xml"/>
+       <mapper resource="mapper/ReviewMapper.xml"/>
    </mappers>  
    
 </configuration> 

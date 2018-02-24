@@ -34,7 +34,6 @@ public class CityInfoParse {
 				cityInfo.setPinyin(cityth);
 				data.add(cityInfo);
 			}
-
 		}
 		
 		return data;

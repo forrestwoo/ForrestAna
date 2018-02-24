@@ -14,8 +14,11 @@ import org.apache.http.HttpConnection;
 import org.apache.ibatis.jdbc.Null;
 
 public class ImageUtils {
-	private static int count = 0;
 
+	public static String getRootPath() 
+	{
+		return "g:\\images\\";
+	}
 	public static String saveToFile(String imageUrl,String path) {
 		FileOutputStream fileOutputStream = null;
 		BufferedInputStream bis = null;
@@ -29,20 +32,29 @@ public class ImageUtils {
 		try {
 
 			url = new URL(imageUrl);
-
-			httpURL = (HttpURLConnection) url.openConnection();
-			httpURL.connect();
-			bis = new BufferedInputStream(httpURL.getInputStream());
+			if (url.getProtocol().equals("http")) {
+				httpURL = (HttpURLConnection) url.openConnection();
+				httpURL.connect();
+				bis = new BufferedInputStream(httpURL.getInputStream());
+			}else if (url.getProtocol().equals("https")) {
+				httpsURL = (HttpsURLConnection)url.openConnection();
+				httpsURL.connect();
+				bis = new BufferedInputStream(httpsURL.getInputStream());
+			}
+			
 			File dir = new File("g://images" +"/" + path);
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
 			if (imageUrl.indexOf("%") < imageUrl.lastIndexOf("/") + 1)
-				imageName = "g:\\images\\" + path + "\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+				imageName = getRootPath() + path + "\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
 			else
-				imageName = "g:\\images\\" + path + "\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1, imageUrl.indexOf("%"));
+				imageName = getRootPath() + path + "\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1, imageUrl.indexOf("%"));
 
 			File file = new File(imageName);
+			if (file.exists()) {
+				return imageName;
+			}
 			fileOutputStream = new FileOutputStream(file);
 			while ((size = bis.read(buf)) != -1) {
 				fileOutputStream.write(buf, 0, size);
@@ -53,7 +65,6 @@ public class ImageUtils {
 
 			e.printStackTrace();
 		} finally {
-			count++;
 			try {
 				if (fileOutputStream != null) {
 					fileOutputStream.close();
@@ -72,7 +83,7 @@ public class ImageUtils {
 				e2.printStackTrace();
 			}
 		}
-		System.out.println("imageName e......" + imageName);
+		System.out.println("imageName database:" + imageName);
 
 		return imageName;
 	}

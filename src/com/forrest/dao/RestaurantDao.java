@@ -6,5 +6,6 @@ import com.forrest.model.Restaurant;
 
 public interface RestaurantDao {
 	public void insertRestos(List<Restaurant> list);
-//	public  Restaurant updateRestos();
+	public List<String> selectRidFromResto();
+	public void updateRestoTele(Restaurant restaurant);
 }
