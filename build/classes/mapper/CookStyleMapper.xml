@@ -16,6 +16,6 @@
 	</insert>
 
 	<select id="selectCookStyles" resultType="string">
-		select categorycode from styleofcook where id > 26
+		select categorycode from styleofcook
 	</select>
 </mapper>

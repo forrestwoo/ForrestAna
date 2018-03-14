@@ -2,6 +2,7 @@ package com.forrest.model;
 
 public class Review {
 	private long id;
+	private int userid;
 	private String rid;
 	private String user;
 	private String content;
@@ -42,5 +43,11 @@ public class Review {
 	}
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

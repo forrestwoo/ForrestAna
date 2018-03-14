@@ -9,20 +9,23 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class ForrestUtils {
-	public static int getPageCount(HttpClient client, String url) throws Exception, IOException {
+	public static int getPageCount(HttpClient client, String url, String cssQuery) throws Exception, IOException {
 		String htmlString = HTTPUtils.getHTMLData(client, url);
 		if (htmlString == null) {
 			return 0;
 		}
 		Document doc = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
-		Elements elements = doc.select("div[class=page]").select("a");
+		/*
+		 * div[class=reviews-pages] ÆÀÂÛÒ³Êý
+		 * page ²ÍÌüÒ³Êý
+		 * 
+		 * */
+		Elements elements = doc.select(cssQuery).select("a");
 		System.out.println("url " + url);
-		if (elements.size() == 0) {
-			return 0;
-		}
-		if (elements.size() == 1) {
+		if (elements == null || elements.size() == 0) {
 			return 1;
 		}
+
 		Element element = elements.get(elements.size() - 2);
 
 		return Integer.parseInt(element.text());

@@ -32,9 +32,18 @@
 			#{item.image},#{item.tele},#{item.businessHours},#{item.rid},#{item.city},#{item.source},#{item.cate})
 		</foreach>
 	</insert>
+	<insert id="insertResto" parameterType="restaurant" useGeneratedKeys="true">
+	<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into restaurant
+		(name,statcont,commentNum,address,consumptionPerPerson,image,rid,city,source,cate)
+		value (#{name},#{statcont},#{commentNum},#{address},#{consumptionPerPerson},#{image},#{rid},#{city},#{source},#{cate})
+	</insert>
 
 	<select id="selectRidFromResto" resultType="string">
 		select rid 
-		from restaurant 
+		from restaurant where tele='010-12345678'
 	</select>
 </mapper>

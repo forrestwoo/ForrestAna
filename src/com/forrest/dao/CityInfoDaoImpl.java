@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.forrest.mapper.CityInfoMapper;
 import com.forrest.model.CityInfo;
 
-@Component
+@Repository
 public class CityInfoDaoImpl implements CityInfoDao {
 
 	@Autowired

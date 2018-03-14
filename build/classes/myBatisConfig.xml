@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
-"http://mybatis.org/dtd/mybatis-3-config.dtd">  
-<configuration>  
-    <typeAliases>  
-      <typeAlias alias="user" type="com.forrest.model.User"/> 
-      <typeAlias alias="restaurant" type="com.forrest.model.Restaurant"/>  
-      <typeAlias alias="cityInfo" type="com.forrest.model.CityInfo"/>
-      <typeAlias alias="cookStyle" type="com.forrest.model.CookStyle"/>
-      <typeAlias alias="review" type="com.forrest.model.Review"/>
-   </typeAliases>    
-   <mappers>  
-       <mapper resource="mapper/UserMapper.xml"/>  
-       <mapper resource="mapper/RestoMapper.xml"/>
-       <mapper resource="mapper/CityInfoMapper.xml"/>
-       <mapper resource="mapper/CookStyleMapper.xml"/>
-       <mapper resource="mapper/ReviewMapper.xml"/>
-   </mappers>  
-   
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="user" type="com.forrest.model.User" />
+		<typeAlias alias="restaurant" type="com.forrest.model.Restaurant" />
+		<typeAlias alias="cityInfo" type="com.forrest.model.CityInfo" />
+		<typeAlias alias="cookStyle" type="com.forrest.model.CookStyle" />
+		<typeAlias alias="review" type="com.forrest.model.Review" />
+		<typeAlias alias="mylist" type="com.forrest.model.MyList" />
+		<typeAlias alias="listResponse" type="com.forrest.model.ListResponse" />
+		<typeAlias alias="member" type="com.forrest.model.Member" />
+		<typeAlias alias="topic" type="com.forrest.model.Topic" />
+		<typeAlias alias="tempTable" type="com.forrest.model.TempTable" />
+
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/UserMapper.xml"/>
+		<mapper resource="mapper/RestoMapper.xml"/>
+		<mapper resource="mapper/CityInfoMapper.xml"/>
+		<mapper resource="mapper/CookStyleMapper.xml"/>
+		<mapper resource="mapper/ReviewMapper.xml"/>
+		<mapper resource="mapper/ListMapper.xml"/>
+		<mapper resource="mapper/ListResponseMapper.xml"/>
+		<mapper resource="mapper/MemberMapper.xml"/>
+		<mapper resource="mapper/TopicMapper.xml"/>
+		<mapper resource="mapper/TempTableMapper.xml"/>
+	</mappers>
+
 </configuration> 

@@ -11,4 +11,5 @@ public interface RestoMapper {
 	public List<Long> selectRestoId();
 	public List<String> selectRidFromResto();
 	public void updateRestoTele(Restaurant restaurant);
+	public void insertResto(Restaurant restaurant);
 }

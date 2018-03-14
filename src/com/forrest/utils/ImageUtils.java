@@ -15,11 +15,16 @@ import org.apache.ibatis.jdbc.Null;
 
 public class ImageUtils {
 
-	public static String getRootPath() 
+	public static String getRootPath(ImageType type) 
 	{
-		return "g:\\images\\";
+		if (type == ImageType.RESTO) {
+			return "g:\\images\\";
+		}
+		else {
+			return "g:\\members\\";
+		}
 	}
-	public static String saveToFile(String imageUrl,String path) {
+	public static String saveToFile(String imageUrl,String path, ImageType type) {
 		FileOutputStream fileOutputStream = null;
 		BufferedInputStream bis = null;
 		HttpURLConnection httpURL = null;
@@ -41,15 +46,21 @@ public class ImageUtils {
 				httpsURL.connect();
 				bis = new BufferedInputStream(httpsURL.getInputStream());
 			}
-			
-			File dir = new File("g://images" +"/" + path);
+			String rootPath = "";
+			if (type == ImageType.RESTO) {
+				rootPath = "g://images";
+			}
+			else {
+				rootPath = "g://members";
+			}
+			File dir = new File(rootPath +"/" + path);
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
 			if (imageUrl.indexOf("%") < imageUrl.lastIndexOf("/") + 1)
-				imageName = getRootPath() + path + "\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+				imageName = getRootPath(type) + path + "\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
 			else
-				imageName = getRootPath() + path + "\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1, imageUrl.indexOf("%"));
+				imageName = getRootPath(type) + path + "\\" + imageUrl.substring(imageUrl.lastIndexOf("/") + 1, imageUrl.indexOf("%"));
 
 			File file = new File(imageName);
 			if (file.exists()) {

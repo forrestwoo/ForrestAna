@@ -1,5 +1,6 @@
 package com.forrest.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
@@ -14,8 +15,11 @@ import com.forrest.dao.CityInfoDao;
 import com.forrest.dao.CookStyleDao;
 import com.forrest.dao.RestaurantDao;
 import com.forrest.dao.ReviewDao;
+import com.forrest.dao.TempTableDao;
 import com.forrest.model.Restaurant;
 import com.forrest.model.Review;
+import com.forrest.model.TempData;
+import com.forrest.model.TempTable;
 import com.forrest.parse.BaiduImageParse;
 import com.forrest.parse.CityInfoParse;
 import com.forrest.parse.RestoOtherHTMLDataParse;
@@ -30,13 +34,10 @@ public class RestoController {
 	private RestaurantDao restaurantDao;
 
 	@Autowired
-	private CityInfoDao cityInfoDao;
-
-	@Autowired
 	private CookStyleDao cookStyleDao;
 
 	@Autowired
-	private ReviewDao reviewDao;
+	private TempTableDao tempTableDao;
 
 	@Autowired
 	public RestoController(RestaurantDao restaurantDao) {
@@ -46,65 +47,82 @@ public class RestoController {
 	@RequestMapping("/addRestos")
 	public String addRestos() throws Exception {
 
-		// HttpClient client = HttpClients.createDefault();
-		//
-		// String rootUrlString = "http://www.dianping.com/";
-		//
-		// String urlString = "";
-		//
-		// List<String> cities = cityInfoDao.selectCities();
-		// List<String> cates = cookStyleDao.selectCookStyles();
-		//
-		//
-		// for (int i = 0; i < cities.size(); i++) {
-		// String temp = rootUrlString + cities.get(i) + "/ch10/";
-		//
-		// for (int j = 0; j < cates.size(); j++) {
-		// urlString=temp + cates.get(j);
-		// int pages = ForrestUtils.getPageCount(client, urlString);
-		// if (pages < 1) {
-		// continue;
-		// }
-		// for (int k = 1; k < pages + 1; k++) {
-		// String urlString1 = urlString + "p" +k;
-		// List<Restaurant> list = RestoParse.getData(client, urlString1);
-		// System.out.println("url e......" + urlString1);
-		//
-		// if (list.size() > 0) {
-		// restaurantDao.insertRestos(list);
-		// }
-		// }
-		// }
-		// }
-		//
+		HttpClient client = HttpClients.createDefault();
 
-		List<String> ridList = restaurantDao.selectRidFromResto();
-		String urlString = "http://www.dianping.com/shop/";
-		for (int i = 2000; i < ridList.size(); i++) {
-			String string = ridList.get(i);
-			String url = urlString + string;
-			System.out.println("ÍøÕ¾µØÖ·£º" + url);
-			System.out.println("Ë÷ÒýID£º" + i);
+		String rootUrlString = "http://www.dianping.com/";
 
-			Dictionary<String, List> dictionary = ReviewParse.getData(HttpClients.createDefault(), url, string);
-			List<Restaurant> rlList = dictionary.get("restaurant");
+		String urlString = "";
 
-			if (ridList.size() > 0) {
-				restaurantDao.updateRestoTele(rlList.get(0));
+		List<String> cates = cookStyleDao.selectCookStyles();
+
+		String temp = rootUrlString + "beijing/ch10/";
+
+		for (int j = 0; j < cates.size(); j++) {
+			urlString = temp + cates.get(j);
+			int pages = ForrestUtils.getPageCount(client, urlString, "div[class=page]");
+			if (pages < 1) {
+				continue;
 			}
-			// Restaurant restaurant = new Restaurant();
-			// restaurant.setRid(string);
-			// restaurant.setTele(RestoParse.getTeleData(HttpClients.createDefault(), url));
-			// if (restaurant != null) {
-			// restaurantDao.updateRestoTele(restaurant);
-			// }
+			for (int k = 1; k < pages + 1; k++) {
+				String urlString1 = urlString + "p" + k;
+				TempTable tempTable = new TempTable();
+				tempTable.setName(urlString1);
+				tempTableDao.insertTempData(tempTable);
+				List<Restaurant> list = RestoParse.getData(client, urlString1);
+				System.out.println("url e......" + urlString1);
+
+				if (list.size() > 0) {
+					restaurantDao.insertRestos(list);
+				}
+			}
 		}
+
 		return "addRestos";
 	}
 
-	@RequestMapping("/updateRestos")
-	public String initData() {
+	@RequestMapping("getRestoPhotos")
+	public String getRestoPhotos() throws Exception, Exception {
+		// http://www.dianping.com/shop/10007873/photos
+		// List<String> ridList = restaurantDao.selectRidFromResto();
+		// String urlString = "http://www.dianping.com/shop/";
+		// for (int i = 0; i < ridList.size(); i++) {
+		// String string = ridList.get(i);
+		// String url = urlString + string + "/photos";
+		//
+		// System.out.println("ÍøÕ¾µØÖ·£º" + url);
+		// System.out.println("Ë÷ÒýID£º" + i);
+		//
+		// int page = ForrestUtils.getPageCount(HttpClients.createDefault(), url);
+		// for (int j = 0; j < page; j++) {
+		// String fullurl = url + "?pg=" + j + 1;
+		//
+		// }
+		// }
+		return "getRestoPhotos";
+	}
 
-		return "update";
+	@RequestMapping("/updateRestoTele")
+	public String updateRestoTele() throws Exception {
+		List<String> ridList = restaurantDao.selectRidFromResto();
+		String urlString = "http://www.dianping.com/shop/";
+		for (int i = 0; i < ridList.size(); i++) {
+			String string = ridList.get(i);
+			String url = urlString + string;
+
+			System.out.println("ÍøÕ¾µØÖ·£º" + url);
+			System.out.println("Ë÷ÒýID£º" + i);
+			
+			String tele = RestoParse.getTeleData(HttpClients.createDefault(), url);
+			Restaurant restaurant = new Restaurant();
+			restaurant.setRid(string);
+			if (tele != null) {
+				restaurant.setTele(tele);
+			}else {
+				restaurant.setTele("ÔÝÎÞ");
+			}
+			restaurantDao.updateRestoTele(restaurant);
+
+		}
+		return "addRestos";
 	}
 }

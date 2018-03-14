@@ -12,6 +12,7 @@ import org.jsoup.select.Elements;
 
 import com.forrest.model.Restaurant;
 import com.forrest.utils.HTTPUtils;
+import com.forrest.utils.ImageType;
 import com.forrest.utils.ImageUtils;
 
 public class RestoParse {
@@ -33,10 +34,11 @@ public class RestoParse {
 			String commentNum = ele.select("div[class=txt]").select("div[class=comment]").select("span").attr("title");
 			String statcont = ele.select("div[class=txt]").select("div[class=comment]").select("a[class=review-num]")
 					.select("b").text();
-			String address = ele.select("div[class=txt]").select("div[class=tag-addr]").select("span[class=addr]").text();
+			String address = ele.select("div[class=txt]").select("div[class=tag-addr]").select("span[class=addr]")
+					.text();
 			String consumptionPerPerson = "-1";
-			String tt = ele.select("div[class=txt]").select("div[class=comment]")
-					.select("a[class=mean-price]").select("b").text();
+			String tt = ele.select("div[class=txt]").select("div[class=comment]").select("a[class=mean-price]")
+					.select("b").text();
 			if (tt.length() > 0) {
 				consumptionPerPerson = tt.substring(1);
 			}
@@ -44,7 +46,7 @@ public class RestoParse {
 			Restaurant restaurant = new Restaurant();
 			restaurant.setName(name);
 			restaurant.setCommentNum(commentNum);
-			restaurant.setImage(ImageUtils.saveToFile(image,rid));
+			restaurant.setImage(ImageUtils.saveToFile(image, rid, ImageType.RESTO));
 			restaurant.setStatcont(statcont);
 			restaurant.setAddress(address);
 			restaurant.setConsumptionPerPerson(consumptionPerPerson);
@@ -58,7 +60,7 @@ public class RestoParse {
 			// System.out.println("url " + url);
 
 			String cate = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("p"));
-//			System.out.println("类别 " + cate);
+			// System.out.println("类别 " + cate);
 			restaurant.setCate(cate);
 			restaurant.setCity(city);
 			restaurant.setSource("大众点评");
@@ -68,19 +70,17 @@ public class RestoParse {
 
 		return data;
 	}
-	
+
+	// 更新电话和营业时间
 	public static String getTeleData(HttpClient client, String url) throws Exception {
 		Document doc = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
-		Elements elements = doc.select("p[class=phone]");
-		
+		Elements elements = doc.select("p[class=expand-info tel]").select("span[class=item]");
 		if (elements.size() < 1) {
 			return null;
 		}
-		String tele = "";
-		for (Element ele : elements) {
-			tele = ele.select("em").text();
-		}
-		
+		String tele = elements.text();
+
 		return tele;
 	}
+
 }

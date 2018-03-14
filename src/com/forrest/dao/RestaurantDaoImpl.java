@@ -29,4 +29,9 @@ public class RestaurantDaoImpl implements RestaurantDao {
 		restoMapper.updateRestoTele(restaurant);
 	}
 
+	@Override
+	public void insertResto(Restaurant restaurant) {
+		restoMapper.insertResto(restaurant);
+	}
+
 }

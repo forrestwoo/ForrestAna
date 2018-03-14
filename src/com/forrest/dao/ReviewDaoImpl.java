@@ -14,8 +14,12 @@ public class ReviewDaoImpl implements ReviewDao {
 	private ReviewMapper reviewMapper;
 
 	@Override
+	public void insertReview(Review review) {
+		reviewMapper.insertReview(review);
+	}
+
+	@Override
 	public void insertReviews(List<Review> list) {
 		reviewMapper.insertReviews(list);
 	}
-
 }

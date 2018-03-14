@@ -255,9 +255,9 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="addRestos" target="menuFrame"><i class="fa fa-circle-o"></i>餐厅数据</a></li>
-            <li><a href="addCities" target="menuFrame"><i class="fa fa-circle-o"></i>城市数据</a></li>
-            <li><a href="" target="menuFrame"><i class="fa fa-circle-o"></i> 美食类别数据</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html" menuFrame><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+            <li><a href="addReviews" target="menuFrame"><i class="fa fa-circle-o"></i>餐厅评论</a></li>
+            <li><a href="addMembers" target="menuFrame"><i class="fa fa-circle-o"></i> 用户数据</a></li>
+            <li><a href="updateRestoTele" target="menuFrame"><i class="fa fa-circle-o"></i> 更新餐厅电话</a></li>
           </ul>
         </li>
         <li class="treeview">

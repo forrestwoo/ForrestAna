@@ -49,4 +49,5 @@ public class UserController {
 	public String setting() {
 		return "userList";
 	}
+
 }

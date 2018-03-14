@@ -48,15 +48,16 @@
 		<!-- 关闭abanded连接时输出错误日志 -->
 		<property name="logAbandoned" value="${logAbandoned}" />
 	</bean>
-	
-	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-	<property name="corePoolSize" value="5"></property>
-	<property name="keepAliveSeconds" value="200"></property>
-	<property name="maxPoolSize" value="10"></property>
-	<property name="queueCapacity" value="20"></property>
-	<property name="rejectedExecutionHandler">
-	<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
-	</property>
+
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="5"></property>
+		<property name="keepAliveSeconds" value="200"></property>
+		<property name="maxPoolSize" value="10"></property>
+		<property name="queueCapacity" value="20"></property>
+		<property name="rejectedExecutionHandler">
+			<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+		</property>
 	</bean>
 	<!-- shiro config -->
 
@@ -85,8 +86,27 @@
 		<property name="mapperInterface" value="com.forrest.mapper.ReviewMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	<bean id="listMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.forrest.mapper.ListMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="listResponseMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.forrest.mapper.ListResponseMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="memberMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.forrest.mapper.MemberMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="topicMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.forrest.mapper.TopicMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+		<bean id="tempTableMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.forrest.mapper.TempTableMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
 	<!-- 自动扫描注解的bean -->
 	<context:component-scan base-package="com.forrest.dao" />
-
 
 </beans>
