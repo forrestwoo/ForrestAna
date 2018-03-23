@@ -30,7 +30,7 @@ public class MemberController {
 	{
 		List<String> uidList = tempTableDao.selectUseridFromTemp();
 		String urlString = "http://www.dianping.com/member/";
-		for (int i = 80; i < uidList.size(); i++) {
+		for (int i = 657; i < uidList.size(); i++) {
 			String url = urlString + uidList.get(i);
 			System.out.println("ÍøÕ¾µØÖ·£º" + url);
 			System.out.println("Ë÷ÒýID£º" + i);

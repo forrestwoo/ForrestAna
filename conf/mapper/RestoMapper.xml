@@ -43,7 +43,7 @@
 	</insert>
 
 	<select id="selectRidFromResto" resultType="string">
-		select rid 
-		from restaurant where tele='010-12345678'
+		select name 
+		from temp_data 
 	</select>
 </mapper>

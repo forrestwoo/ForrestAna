@@ -55,10 +55,10 @@ public class RestoController {
 
 		List<String> cates = cookStyleDao.selectCookStyles();
 
-		String temp = rootUrlString + "beijing/ch10/";
+		String temp = rootUrlString + "shanghai/ch10/";
 
 		for (int j = 0; j < cates.size(); j++) {
-			urlString = temp + cates.get(j);
+			urlString = temp + "g251";
 			int pages = ForrestUtils.getPageCount(client, urlString, "div[class=page]");
 			if (pages < 1) {
 				continue;
@@ -80,45 +80,27 @@ public class RestoController {
 		return "addRestos";
 	}
 
-	@RequestMapping("getRestoPhotos")
-	public String getRestoPhotos() throws Exception, Exception {
-		// http://www.dianping.com/shop/10007873/photos
-		// List<String> ridList = restaurantDao.selectRidFromResto();
-		// String urlString = "http://www.dianping.com/shop/";
-		// for (int i = 0; i < ridList.size(); i++) {
-		// String string = ridList.get(i);
-		// String url = urlString + string + "/photos";
-		//
-		// System.out.println("网站地址：" + url);
-		// System.out.println("索引ID：" + i);
-		//
-		// int page = ForrestUtils.getPageCount(HttpClients.createDefault(), url);
-		// for (int j = 0; j < page; j++) {
-		// String fullurl = url + "?pg=" + j + 1;
-		//
-		// }
-		// }
-		return "getRestoPhotos";
-	}
-
 	@RequestMapping("/updateRestoTele")
 	public String updateRestoTele() throws Exception {
 		List<String> ridList = restaurantDao.selectRidFromResto();
 		String urlString = "http://www.dianping.com/shop/";
-		for (int i = 0; i < ridList.size(); i++) {
+		for (int i = 0; i < 100; i++) {
 			String string = ridList.get(i);
 			String url = urlString + string;
 
 			System.out.println("网站地址：" + url);
 			System.out.println("索引ID：" + i);
 			
+			
 			String tele = RestoParse.getTeleData(HttpClients.createDefault(), url);
+			System.out.println("电话ID：" + tele);
+
 			Restaurant restaurant = new Restaurant();
 			restaurant.setRid(string);
 			if (tele != null) {
 				restaurant.setTele(tele);
 			}else {
-				restaurant.setTele("暂无");
+				restaurant.setTele("暂无电话");
 			}
 			restaurantDao.updateRestoTele(restaurant);
 

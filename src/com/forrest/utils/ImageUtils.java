@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -24,7 +25,7 @@ public class ImageUtils {
 			return "g:\\members\\";
 		}
 	}
-	public static String saveToFile(String imageUrl,String path, ImageType type) {
+	public static String saveToFile(String imageUrl,String path, ImageType type) throws MalformedURLException {
 		FileOutputStream fileOutputStream = null;
 		BufferedInputStream bis = null;
 		HttpURLConnection httpURL = null;
@@ -37,6 +38,8 @@ public class ImageUtils {
 		try {
 
 			url = new URL(imageUrl);
+//			System.out.println("Í¼Æ¬µØÖ·Îª£º" + url);
+
 			if (url.getProtocol().equals("http")) {
 				httpURL = (HttpURLConnection) url.openConnection();
 				httpURL.connect();
@@ -75,7 +78,9 @@ public class ImageUtils {
 		} catch (IOException e) {
 
 			e.printStackTrace();
-		} finally {
+		}
+		
+		finally {
 			try {
 				if (fileOutputStream != null) {
 					fileOutputStream.close();
@@ -94,7 +99,7 @@ public class ImageUtils {
 				e2.printStackTrace();
 			}
 		}
-		System.out.println("imageName database:" + imageName);
+//		System.out.println("imageName database:" + imageName);
 
 		return imageName;
 	}

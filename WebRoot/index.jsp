@@ -255,6 +255,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="addRestos" target="menuFrame"><i class="fa fa-circle-o"></i>餐厅数据</a></li>
+             <li><a href="getRestoPhotos" target="menuFrame"><i class="fa fa-circle-o"></i>餐厅图片</a></li>
             <li><a href="addReviews" target="menuFrame"><i class="fa fa-circle-o"></i>餐厅评论</a></li>
             <li><a href="addMembers" target="menuFrame"><i class="fa fa-circle-o"></i> 用户数据</a></li>
             <li><a href="updateRestoTele" target="menuFrame"><i class="fa fa-circle-o"></i> 更新餐厅电话</a></li>
@@ -268,7 +269,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-          <li><a href="addlibs" target="menuFrame"><i class="fa fa-circle-o"></i>类库下载</a></li>
+          <li><a href="addIps" target="menuFrame"><i class="fa fa-circle-o"></i>类库下载</a></li>
           </ul>
           
         </li>

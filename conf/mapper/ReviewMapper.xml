@@ -2,24 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.forrest.mapper.ReviewMapper">
 
-	<insert id="insertReview" parameterType = "review"  useGeneratedKeys="true">
-	<selectKey resultType="long" keyProperty="id" order="AFTER">
-		SELECT  
-        LAST_INSERT_ID()
-	</selectKey>
-	insert into review (rid,user,content,avatar,imagepath,userid)   
-    value(#{rid},#{user},#{content},#{avatar},#{imagePath},#{userid})  
+	<insert id="insertReview" parameterType="review"
+		useGeneratedKeys="true">
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into review (rid,user,content,avatar,imagepath,userid)
+		value(#{rid},#{user},#{content},#{avatar},#{imagePath},#{userid})
 	</insert>
-	
-	<insert id="insertReviews" parameterType = "java.util.List"  useGeneratedKeys="true">
-	<selectKey resultType="int" keyProperty="id" order="AFTER">
-		SELECT  
-        LAST_INSERT_ID()
-	</selectKey>
-	insert into review (rid,user,content,avatar,imagepath,userid)   
-    values  
-    <foreach collection="list" item="item" index="index" separator="," >  
-        (#{item.rid},#{item.user},#{item.content},#{item.avatar},#{item.imagePath},#{item.userid})  
-    </foreach>
+
+	<insert id="insertReviews" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into review (rid,user,avatar,imagepath,userid)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.rid},#{item.user},#{item.avatar},#{item.imagePath},#{item.userid})
+		</foreach>
 	</insert>
+
+	<update id="updateReviewForRestoPic" parameterType="review">
+		update review
+		<trim prefix="set" suffixOverrides=",">
+			<if test="tele!=null">
+				tele= #{tele},
+			</if>
+			<if test="businessHours!=null">
+				businessHours = #{businessHours},
+			</if>
+		</trim>
+		where rid=#{rid}
+	</update>
 </mapper>
