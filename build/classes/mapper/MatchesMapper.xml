@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forrest.mapper.MatchesMapper">
+
+	<insert id="insertMatches" parameterType="java.util.List">
+	insert into matches (fid,stime,hname,gname,hscore,gscore,hhalfscore,ghalfscore,hstanding,gstanding,round,hid,gid,status,win,draw,lost,pan,handline)   
+    values
+    <foreach collection="list" item="item" index="index"
+			separator=",">
+			 (#{item.fid},#{item.stime},#{item.hname},#{item.gname},#{item.hscore},#{item.gscore},#{item.hhalfscore},#{item.ghalfscore},#{item.hstanding},#{item.gstanding},#{item.round},#{item.hid},#{item.gid},#{item.status},
+			 #{item.win},#{item.draw},#{item.lost},#{item.pan},#{item.handline})  
+		</foreach>
+   
+	</insert>
+</mapper>

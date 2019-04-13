@@ -14,20 +14,21 @@
 		<typeAlias alias="topic" type="com.forrest.model.Topic" />
 		<typeAlias alias="tempTable" type="com.forrest.model.TempTable" />
 		<typeAlias alias="ipMessage" type="com.forrest.model.IPMessage" />
-
+		<typeAlias alias="matches" type="com.forrest.model.Matches" />
 	</typeAliases>
 	<mappers>
-		<mapper resource="mapper/UserMapper.xml"/>
-		<mapper resource="mapper/RestoMapper.xml"/>
-		<mapper resource="mapper/CityInfoMapper.xml"/>
-		<mapper resource="mapper/CookStyleMapper.xml"/>
-		<mapper resource="mapper/ReviewMapper.xml"/>
-		<mapper resource="mapper/ListMapper.xml"/>
-		<mapper resource="mapper/ListResponseMapper.xml"/>
-		<mapper resource="mapper/MemberMapper.xml"/>
-		<mapper resource="mapper/TopicMapper.xml"/>
-		<mapper resource="mapper/TempTableMapper.xml"/>
-		<mapper resource="mapper/IPMessageMapper.xml"/>
+		<mapper resource="mapper/UserMapper.xml" />
+		<mapper resource="mapper/RestoMapper.xml" />
+		<mapper resource="mapper/CityInfoMapper.xml" />
+		<mapper resource="mapper/CookStyleMapper.xml" />
+		<mapper resource="mapper/ReviewMapper.xml" />
+		<mapper resource="mapper/ListMapper.xml" />
+		<mapper resource="mapper/ListResponseMapper.xml" />
+		<mapper resource="mapper/MemberMapper.xml" />
+		<mapper resource="mapper/TopicMapper.xml" />
+		<mapper resource="mapper/TempTableMapper.xml" />
+		<mapper resource="mapper/IPMessageMapper.xml" />
+		<mapper resource="mapper/MatchesMapper.xml" />
 	</mappers>
 
 </configuration> 
