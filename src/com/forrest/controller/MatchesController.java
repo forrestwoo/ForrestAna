@@ -25,12 +25,36 @@ public class MatchesController {
 	public String insertMatches() throws Exception
 	{
 		HttpClient client = HttpClients.createDefault();
-		String url = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=13195&round=26";
-		List<Matches> list = MatchesParse.getData(client, url);
-		
-		if (list.size() > 0) {
-			matchesDao.insertMatches(list);
+		//"https://liansai.500.com/index.php?c=score&a=getmatch&stid=13195&round=26";
+		/**
+		 * 18/19 13195
+		 * 17/18 11944
+		 * 16/17 10193
+		 * 15/16 8819
+		 * 14/15 7572
+		 * 13/14 6902
+		 * 12/13 6207
+		 * 11/12 5484
+		 * 10/11 4865
+		 * 09/10 4093
+		 * 08/09 3342
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
+		String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=3342&round=";
+		String url = "";
+		for (int i = 1; i < 39; i++) {
+			url = baseString + i;
+			List<Matches> list = MatchesParse.getData(client, url);
+			
+			if (list.size() > 0) {
+				matchesDao.insertMatches(list);
+			}
 		}
+		
 		return "insertMatches";
 	}
 

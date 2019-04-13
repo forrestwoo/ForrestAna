@@ -3,7 +3,7 @@
 <mapper namespace="com.forrest.mapper.MatchesMapper">
 
 	<insert id="insertMatches" parameterType="java.util.List">
-	insert into matches (fid,stime,hname,gname,hscore,gscore,hhalfscore,ghalfscore,hstanding,gstanding,round,hid,gid,status,win,draw,lost,pan,handline)   
+	insert into laliga (fid,stime,hname,gname,hscore,gscore,hhalfscore,ghalfscore,hstanding,gstanding,round,hid,gid,status,win,draw,lost,pan,handline)   
     values
     <foreach collection="list" item="item" index="index"
 			separator=",">

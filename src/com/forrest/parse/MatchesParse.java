@@ -23,9 +23,7 @@ public class MatchesParse {
 //		System.out.println(dataString);
 		list = JSONObject.parseArray(dataString, Matches.class);
 //		System.out.println("list" + list+list.size());
-for (Matches matches : list) {
-	System.out.println(matches.getHstanding());
-}
+
 		return list;
 	}
 
