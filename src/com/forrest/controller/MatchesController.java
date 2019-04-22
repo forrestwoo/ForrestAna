@@ -27,8 +27,8 @@ public class MatchesController {
 		HttpClient client = HttpClients.createDefault();
 		//"https://liansai.500.com/index.php?c=score&a=getmatch&stid=13195&round=26";
 		/**
-		 * 18/19 13195
-		 * 17/18 11944
+		 * Î÷¼×18/19 13195
+		 * Òâ¼×13207
 		 * 16/17 10193
 		 * 15/16 8819
 		 * 14/15 7572
@@ -44,7 +44,8 @@ public class MatchesController {
 		 * 
 		 * 
 		 */
-		String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=3342&round=";
+		/**
+		 String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=6207&round=";
 		String url = "";
 		for (int i = 1; i < 39; i++) {
 			url = baseString + i;
@@ -54,7 +55,13 @@ public class MatchesController {
 				matchesDao.insertMatches(list);
 			}
 		}
+		 */
+		String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=3342&round=33";;
+		List<Matches> list = MatchesParse.getData(client, baseString);
 		
+		if (list.size() > 0) {
+			matchesDao.insertMatches(list);
+		}
 		return "insertMatches";
 	}
 

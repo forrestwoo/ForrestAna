@@ -1,6 +1,7 @@
 package com.forrest.utils;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import org.apache.http.client.HttpClient;
 import org.jsoup.Jsoup;
@@ -16,10 +17,9 @@ public class ForrestUtils {
 		}
 		Document doc = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
 		/*
-		 * div[class=reviews-pages] 评论页数
-		 * page 餐厅页数
+		 * div[class=reviews-pages] 评论页数 page 餐厅页数
 		 * 
-		 * */
+		 */
 		Elements elements = doc.select(cssQuery).select("a");
 		System.out.println("url " + url);
 		if (elements == null || elements.size() == 0) {
@@ -30,5 +30,15 @@ public class ForrestUtils {
 
 		return Integer.parseInt(element.text());
 
+	}
+
+	public static float toFloat(Object object) {
+		float f = 0;
+		if (object instanceof BigDecimal) {
+			f = ((BigDecimal) object).floatValue();
+		} else if (object instanceof Integer) {
+			f = Float.parseFloat(object.toString());
+		}
+		return f;
 	}
 }

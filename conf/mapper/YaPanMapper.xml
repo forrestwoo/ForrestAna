@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forrest.mapper.YaPanMapper">
+	<insert id="insertYaPan" parameterType="yaPan">
+		insert into yapan
+		(mid,win1,lost1,pankou1,win2,lost2,pankou2)
+		value (#{mid},#{win1},#{lost1},#{pankou1},#{win2},#{lost2},#{pankou2})
+	</insert>
+</mapper>

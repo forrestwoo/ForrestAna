@@ -13,11 +13,17 @@ public class MatchesDaoImpl implements MatchesDao {
 
 	@Autowired
 	private MatchesMapper matchesMapper;
-	
+
 	@Override
 	public void insertMatches(List<Matches> list) {
 		matchesMapper.insertMatches(list);
 
+	}
+
+	@Override
+	public List<Integer> selectMatcheId() {
+		List<Integer> list = matchesMapper.selectMatcheId();
+		return list;
 	}
 
 }

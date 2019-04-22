@@ -254,8 +254,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="insertMatches" target="menuFrame"><i class="fa fa-circle-o"></i>餐厅数据</a></li>
-             <li><a href="getRestoPhotos" target="menuFrame"><i class="fa fa-circle-o"></i>餐厅图片</a></li>
+            <li><a href="insertMatches" target="menuFrame"><i class="fa fa-circle-o"></i>赛事数据</a></li>
+             <li><a href="insertOuZhi" target="menuFrame"><i class="fa fa-circle-o"></i>赛事赔率</a></li>
             <li><a href="addReviews" target="menuFrame"><i class="fa fa-circle-o"></i>餐厅评论</a></li>
             <li><a href="addMembers" target="menuFrame"><i class="fa fa-circle-o"></i> 用户数据</a></li>
             <li><a href="updateRestoTele" target="menuFrame"><i class="fa fa-circle-o"></i> 更新餐厅电话</a></li>

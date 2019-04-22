@@ -114,6 +114,14 @@
 		<property name="mapperInterface" value="com.forrest.mapper.MatchesMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+		<bean id="ouZhiMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.forrest.mapper.OuZhiMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="yaPanMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.forrest.mapper.YaPanMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
 	<!-- 自动扫描注解的bean -->
 	<context:component-scan base-package="com.forrest.dao" />
 

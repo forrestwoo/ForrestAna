@@ -15,7 +15,10 @@
 		<typeAlias alias="tempTable" type="com.forrest.model.TempTable" />
 		<typeAlias alias="ipMessage" type="com.forrest.model.IPMessage" />
 		<typeAlias alias="matches" type="com.forrest.model.Matches" />
+		<typeAlias alias="ouZhi" type="com.forrest.model.OuZhi" />
+		<typeAlias alias="yaPan" type="com.forrest.model.YaPan" />
 	</typeAliases>
+	
 	<mappers>
 		<mapper resource="mapper/UserMapper.xml" />
 		<mapper resource="mapper/RestoMapper.xml" />
@@ -29,6 +32,8 @@
 		<mapper resource="mapper/TempTableMapper.xml" />
 		<mapper resource="mapper/IPMessageMapper.xml" />
 		<mapper resource="mapper/MatchesMapper.xml" />
+		<mapper resource="mapper/OuZhiMapper.xml" />
+		<mapper resource="mapper/YaPanMapper.xml" />
 	</mappers>
 
 </configuration> 
