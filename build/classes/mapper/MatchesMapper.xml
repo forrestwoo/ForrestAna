@@ -17,4 +17,5 @@
 		select mid 
 		from tempdate 
 	</select>
+	
 </mapper>

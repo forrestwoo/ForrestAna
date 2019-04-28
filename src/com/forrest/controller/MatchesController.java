@@ -56,7 +56,7 @@ public class MatchesController {
 			}
 		}
 		 */
-		String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=3342&round=33";;
+		String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=13195&round=34";;
 		List<Matches> list = MatchesParse.getData(client, baseString);
 		
 		if (list.size() > 0) {
