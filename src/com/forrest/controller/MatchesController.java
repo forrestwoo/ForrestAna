@@ -25,25 +25,7 @@ public class MatchesController {
 	public String insertMatches() throws Exception
 	{
 		HttpClient client = HttpClients.createDefault();
-		//"https://liansai.500.com/index.php?c=score&a=getmatch&stid=13195&round=26";
-		/**
-		 * Î÷¼×18/19 13195
-		 * Òâ¼×13207
-		 * 16/17 10193
-		 * 15/16 8819
-		 * 14/15 7572
-		 * 13/14 6902
-		 * 12/13 6207
-		 * 11/12 5484
-		 * 10/11 4865
-		 * 09/10 4093
-		 * 08/09 3342
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
+	
 		/**
 		 String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=6207&round=";
 		String url = "";
@@ -56,7 +38,10 @@ public class MatchesController {
 			}
 		}
 		 */
-		String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=13195&round=34";;
+		/*
+		 
+		 * */
+		String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=13195&round=32";;
 		List<Matches> list = MatchesParse.getData(client, baseString);
 		
 		if (list.size() > 0) {
@@ -65,4 +50,11 @@ public class MatchesController {
 		return "insertMatches";
 	}
 
+	@RequestMapping("dataManager")
+	public String dataManager()
+	{
+		
+		return "dataManager";
+	}
+	
 }
