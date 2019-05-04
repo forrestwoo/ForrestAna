@@ -26,4 +26,10 @@ public class MatchesDaoImpl implements MatchesDao {
 		return list;
 	}
 
+	@Override
+	public void deleteMatches(int mid) {
+		matchesMapper.deleteMatches(mid);
+		
+	}
+
 }

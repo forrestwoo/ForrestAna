@@ -13,12 +13,15 @@ import com.forrest.dao.MatchesDao;
 import com.forrest.dao.OuZhiDao;
 import com.forrest.model.OuZhi;
 import com.forrest.parse.OuZhiParse;
+import com.forrest.utils.ImageType;
+import com.forrest.utils.ImageUtils;
 
 @Controller
 public class OuZhiController {
 
 	private OuZhiDao ouZhiDao;
-
+	static int fc = 871;
+	
 	@Autowired
 	private MatchesDao matchesDao;
 
@@ -47,10 +50,10 @@ public class OuZhiController {
 				List<Float> odds2 = OuZhiParse.getData(client, rootUrl + "&cid=" + oddCompany.get(1));
 				List<Float> odds3 = OuZhiParse.getData(client, rootUrl + "&cid=" + oddCompany.get(2));
 				List<Float> odds4 = OuZhiParse.getData(client, rootUrl + "&cid=" + oddCompany.get(3));
-//				System.out.println(rootUrl + "&cid=" + oddCompany.get(0));
-//				System.out.println(rootUrl + "&cid=" + oddCompany.get(1));
-//				System.out.println(rootUrl + "&cid=" + oddCompany.get(2));
-//				System.out.println(rootUrl + "&cid=" + oddCompany.get(3));
+				// System.out.println(rootUrl + "&cid=" + oddCompany.get(0));
+				// System.out.println(rootUrl + "&cid=" + oddCompany.get(1));
+				// System.out.println(rootUrl + "&cid=" + oddCompany.get(2));
+				// System.out.println(rootUrl + "&cid=" + oddCompany.get(3));
 				ouZhi.setMid(mids.get(i));
 				ouZhi.setA1(odds1.get(0));
 				ouZhi.setA2(odds1.get(1));
@@ -80,6 +83,15 @@ public class OuZhiController {
 				ouZhi.setDd2(odds4.get(4));
 				ouZhi.setDd3(odds4.get(5));
 				ouZhiDao.insertOuZhi(ouZhi);
+
+				matchesDao.deleteMatches(mids.get(i));
+				String imageurl="http://liansai.500.com/static/soccerdata/images/TeamPic/teamsignnew_";
+				for (int j = fc; j < fc+5; j++) {
+					String uuu=imageurl+j+".png";
+					ImageUtils.saveToFile(uuu, "fc", ImageType.MEMBER);
+				}
+				
+				fc+=5;
 			}
 		}
 

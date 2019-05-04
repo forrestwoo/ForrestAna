@@ -22,7 +22,7 @@ public class ImageUtils {
 			return "g:\\images\\";
 		}
 		else {
-			return "g:\\members\\";
+			return "g:\\fc\\";
 		}
 	}
 	public static String saveToFile(String imageUrl,String path, ImageType type) throws MalformedURLException {
@@ -54,7 +54,7 @@ public class ImageUtils {
 				rootPath = "g://images";
 			}
 			else {
-				rootPath = "g://members";
+				rootPath = "g://fc";
 			}
 			File dir = new File(rootPath +"/" + path);
 			if (!dir.exists()) {

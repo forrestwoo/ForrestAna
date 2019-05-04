@@ -5,19 +5,25 @@
 <mapper namespace="com.forrest.mapper.MatchesMapper">
 
 	<insert id="insertMatches" parameterType="java.util.List">
-	insert into laliga(fid,stime,hname,gname,hscore,gscore,hhalfscore,ghalfscore,hstanding,gstanding,round,hid,gid,status,win,draw,lost,pan,handline)   
-    values
-    <foreach collection="list" item="item" index="index"
+		insert into
+		matches(fid,stime,hname,gname,hscore,gscore,hhalfscore,ghalfscore,hstanding,gstanding,round,hid,gid,status,win,draw,lost,pan,handline)
+		values
+		<foreach collection="list" item="item" index="index"
 			separator=",">
-			 (#{item.fid},#{item.stime},#{item.hname},#{item.gname},#{item.hscore},#{item.gscore},#{item.hhalfscore},#{item.ghalfscore},#{item.hstanding},#{item.gstanding},#{item.round},#{item.hid},#{item.gid},#{item.status},
-			 #{item.win},#{item.draw},#{item.lost},#{item.pan},#{item.handline})  
+			(#{item.fid},#{item.stime},#{item.hname},#{item.gname},#{item.hscore},#{item.gscore},#{item.hhalfscore},#{item.ghalfscore},#{item.hstanding},#{item.gstanding},#{item.round},#{item.hid},#{item.gid},#{item.status},
+			#{item.win},#{item.draw},#{item.lost},#{item.pan},#{item.handline})
 		</foreach>
-   
+
 	</insert>
-	
+
 	<select id="selectMatcheId" resultType="java.lang.Integer">
-		select mid 
-		from tempdate 
+		select mid
+		from tempdate
 	</select>
 	
+	<delete id="deleteMatches" parameterType="int">
+		delete from tempdate
+		where mid = #{mid}
+	</delete>
+
 </mapper>

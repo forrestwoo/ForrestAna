@@ -256,9 +256,9 @@
           <ul class="treeview-menu">
             <li><a href="insertMatches" target="menuFrame"><i class="fa fa-circle-o"></i>赛事数据</a></li>
              <li><a href="insertOuZhi" target="menuFrame"><i class="fa fa-circle-o"></i>赛事赔率</a></li>
-            <li><a href="addReviews" target="menuFrame"><i class="fa fa-circle-o"></i>餐厅评论</a></li>
-            <li><a href="addMembers" target="menuFrame"><i class="fa fa-circle-o"></i> 用户数据</a></li>
-            <li><a href="updateRestoTele" target="menuFrame"><i class="fa fa-circle-o"></i> 更新餐厅电话</a></li>
+            <li><a href="insertYaPan" target="menuFrame"><i class="fa fa-circle-o"></i>亚盘</a></li>
+            <li><a href="insertDaxiaoqiu" target="menuFrame"><i class="fa fa-circle-o"></i> 大小球</a></li>
+            <li><a href="updateRestoTele" target="menuFrame"><i class="fa fa-circle-o"></i> 事件统计</a></li>
           </ul>
         </li>
         <li class="treeview">

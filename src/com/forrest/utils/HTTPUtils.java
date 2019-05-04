@@ -50,7 +50,7 @@ public class HTTPUtils {
 		String htmlDt = null;
 
 		if (statusCode == 200) {
-			String entity = EntityUtils.toString(response.getEntity(), "utf-8");
+			String entity = EntityUtils.toString(response.getEntity(), "GB2312");
 			htmlDt = entity;
 			EntityUtils.consume(response.getEntity());
 		} else {

@@ -18,7 +18,6 @@ public class OuZhiParse {
 		Document doc = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
 		String dataString = doc.select("body").text();
 		List<Object> list = JSONObject.parseArray(dataString);
-		System.out.println("ssssssssssss" + list.size());
 		List<Float> odds = new ArrayList<>();
 		if (list.size() == 0) {
 			for (int i = 0; i < 6; i++) {

@@ -26,10 +26,30 @@ public class MatchesController {
 	{
 		HttpClient client = HttpClients.createDefault();
 	
-		/**
-		 String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=6207&round=";
+		/*
+		 * 杯赛
+		 	int ouguan[] = {9725,11586,12883};
+		String u1="https://liansai.500.com/index.php?c=score&a=getmatch&stid=";
+		for (int i = 0; i < ouguan.length; i++) {
+			String u2=u1+ouguan[i];
+			for (int j =1; j < 3; j++) {
+				String u3=u2+"&round="+j;
+				List<Matches> list = MatchesParse.getData(client, u3);
+				
+				if (list.size() > 0) {
+					matchesDao.insertMatches(list);
+				}
+			}
+		}
+		主客场round 12
+		分组0
+		决赛1
+		 * */
+	
+		/*
+			 String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=8697&round=";
 		String url = "";
-		for (int i = 1; i < 39; i++) {
+		for (int i = 1; i < 37; i++) {
 			url = baseString + i;
 			List<Matches> list = MatchesParse.getData(client, url);
 			
@@ -37,16 +57,20 @@ public class MatchesController {
 				matchesDao.insertMatches(list);
 			}
 		}
-		 */
-		/*
-		 
+		
 		 * */
-		String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=13195&round=32";;
+		
+		String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=13071&round=1";;
 		List<Matches> list = MatchesParse.getData(client, baseString);
 		
 		if (list.size() > 0) {
 			matchesDao.insertMatches(list);
 		}
+		 
+		 
+		 
+		
+	
 		return "insertMatches";
 	}
 
