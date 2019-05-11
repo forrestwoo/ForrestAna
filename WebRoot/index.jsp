@@ -258,7 +258,7 @@
              <li><a href="insertOuZhi" target="menuFrame"><i class="fa fa-circle-o"></i>赛事赔率</a></li>
             <li><a href="insertYaPan" target="menuFrame"><i class="fa fa-circle-o"></i>亚盘</a></li>
             <li><a href="insertDaxiaoqiu" target="menuFrame"><i class="fa fa-circle-o"></i> 大小球</a></li>
-            <li><a href="updateRestoTele" target="menuFrame"><i class="fa fa-circle-o"></i> 事件统计</a></li>
+            <li><a href="updateMEvent" target="menuFrame"><i class="fa fa-circle-o"></i> 事件统计</a></li>
           </ul>
         </li>
         <li class="treeview">

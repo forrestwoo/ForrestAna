@@ -26,4 +26,12 @@
 		where mid = #{mid}
 	</delete>
 
+<update id="updateMEvent" parameterType="matchesGoal">
+        update sss
+        <set>
+            <if test="zgt != null">zgt=#{zgt},</if>
+            <if test="kgt != null">kgt=#{kgt},</if>
+        </set>
+        where mid=#{mid}
+</update>
 </mapper>
