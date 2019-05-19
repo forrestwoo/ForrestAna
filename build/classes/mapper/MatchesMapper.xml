@@ -6,7 +6,7 @@
 
 	<insert id="insertMatches" parameterType="java.util.List">
 		insert into
-		matches(fid,stime,hname,gname,hscore,gscore,hhalfscore,ghalfscore,hstanding,gstanding,round,hid,gid,status,win,draw,lost,pan,handline)
+		europecup(fid,stime,hname,gname,hscore,gscore,hhalfscore,ghalfscore,hstanding,gstanding,round,hid,gid,status,win,draw,lost,pan,handline)
 		values
 		<foreach collection="list" item="item" index="index"
 			separator=",">

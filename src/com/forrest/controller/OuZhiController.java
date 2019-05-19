@@ -20,7 +20,7 @@ import com.forrest.utils.ImageUtils;
 public class OuZhiController {
 
 	private OuZhiDao ouZhiDao;
-	static int fc = 871;
+	static int fc = 1;
 	
 	@Autowired
 	private MatchesDao matchesDao;
