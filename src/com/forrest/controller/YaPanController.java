@@ -35,7 +35,7 @@ public class YaPanController {
 	public String insertYaPan() throws Exception
 	{
 		HttpClient client = HttpClients.createDefault();
-		String rootUrl = "https://odds.500.com/fenxi/daxiao-";
+		String rootUrl = "https://odds.500.com/fenxi/yazhi-";
 //		String url1 = "https://odds.500.com/fenxi/yazhi-748974.shtml";
 		
 		List<Integer> mids = matchesDao.selectMatcheId();
