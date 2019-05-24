@@ -18,6 +18,7 @@
 		<typeAlias alias="ouZhi" type="com.forrest.model.OuZhi" />
 		<typeAlias alias="yaPan" type="com.forrest.model.YaPan" />
 		<typeAlias alias="matchesGoal" type="com.forrest.model.MatchesGoal" />
+		<typeAlias alias="biFa" type="com.forrest.model.BiFa" />
 	</typeAliases>
 	
 	<mappers>

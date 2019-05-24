@@ -8,12 +8,15 @@ import java.util.List;
 import org.apache.http.client.HttpClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.forrest.model.BiFa;
 import com.forrest.model.Matches;
+import com.forrest.utils.ForrestUtils;
 import com.forrest.utils.HTTPUtils;
 
 public class MatchesParse {
@@ -64,4 +67,62 @@ public class MatchesParse {
 
 		return dictionary;
 	}
+	
+	public static List<Float> getBiFaZhiData(HttpClient client, String url) throws Exception {
+		Document doc = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
+		String dataString = doc.select("body").text();
+		List<Object> list = JSONObject.parseArray(dataString);
+		List<Float> odds = new ArrayList<>();
+		if (list.size() == 0) {
+			for (int i = 0; i < 6; i++) {
+				odds.add((float) 0.00);
+			}
+		} else if (list.size() == 1) {
+			JSONArray object1 = (JSONArray) list.get(0);
+			odds.add(ForrestUtils.toFloat(object1.get(0)));
+			odds.add(ForrestUtils.toFloat(object1.get(1)));
+			odds.add(ForrestUtils.toFloat(object1.get(2)));
+			odds.add(ForrestUtils.toFloat(object1.get(0)));
+			odds.add(ForrestUtils.toFloat(object1.get(1)));
+			odds.add(ForrestUtils.toFloat(object1.get(2)));
+		} else {
+			JSONArray object1 = (JSONArray) list.get(0);
+			JSONArray object2 = (JSONArray) list.get(list.size() - 1);
+
+			odds.add(ForrestUtils.toFloat(object1.get(0)));
+			odds.add(ForrestUtils.toFloat(object1.get(1)));
+			odds.add(ForrestUtils.toFloat(object1.get(2)));
+			odds.add(ForrestUtils.toFloat(object2.get(0)));
+			odds.add(ForrestUtils.toFloat(object2.get(1)));
+			odds.add(ForrestUtils.toFloat(object2.get(2)));
+		}
+
+		return odds;
+	}
+	
+	public static List<Integer> getBiFaMoneyData(HttpClient client, String url) throws Exception {
+		List<Integer> ms = new ArrayList<>();
+		Document document = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
+		Elements elements = document.select("table[class=pub_table pl_table_data  bif-yab]").select("tbody").select("tr");
+
+		if (elements.size()<1) {
+			return null;
+		}
+		
+		for (int i = 2; i < 5; i++) {
+			Element element= elements.get(i);
+			Elements e2 = element.select("td");
+			Element ee = e2.get(7);
+			if (ee.text().equals("-")) {
+				 ms.add(0);
+				 continue;
+			}
+			String ii = ee.text().replaceAll(",","");
+			
+			ms.add(Integer.valueOf(ii));
+		}
+
+		return ms;
+	}
+	
 }

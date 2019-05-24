@@ -6,7 +6,7 @@
 
 	<insert id="insertMatches" parameterType="java.util.List">
 		insert into
-		seriea(fid,stime,hname,gname,hscore,gscore,hhalfscore,ghalfscore,hstanding,gstanding,round,hid,gid,status,win,draw,lost,pan,handline)
+		europecup(fid,stime,hname,gname,hscore,gscore,hhalfscore,ghalfscore,hstanding,gstanding,round,hid,gid,status,win,draw,lost,pan,handline)
 		values
 		<foreach collection="list" item="item" index="index"
 			separator=",">
@@ -20,18 +20,34 @@
 		select mid
 		from tempdate
 	</select>
-	
+
 	<delete id="deleteMatches" parameterType="int">
 		delete from tempdate
 		where mid = #{mid}
 	</delete>
 
-<update id="updateMEvent" parameterType="matchesGoal">
-        update country
-        <set>
-            <if test="zgt != null">zgt=#{zgt},</if>
-            <if test="kgt != null">kgt=#{kgt},</if>
-        </set>
-        where mid=#{mid}
-</update>
+	<update id="updateMEvent" parameterType="matchesGoal">
+		update yijia
+		<set>
+			<if test="zgt != null">zgt=#{zgt},</if>
+			<if test="kgt != null">kgt=#{kgt},</if>
+		</set>
+		where mid=#{mid}
+	</update>
+
+	<update id="updateBifa" parameterType="biFa">
+		update yijia
+		<set>
+			<if test="bifa1 != null">bifa1=#{bifa1},</if>
+			<if test="bifa2 != null">bifa2=#{bifa2},</if>
+			<if test="bifa3 != null">bifa3=#{bifa3},</if>
+			<if test="bifa11 != null">bifa11=#{bifa11},</if>
+			<if test="bifa22 != null">bifa22=#{bifa22},</if>
+			<if test="bifa33 != null">bifa33=#{bifa33},</if>
+			<if test="m1 != null">m1=#{m1},</if>
+			<if test="m2 != null">m2=#{m2},</if>
+			<if test="m3 != null">m3=#{m3},</if>
+		</set>
+		where mid=#{mid}
+	</update>
 </mapper>
