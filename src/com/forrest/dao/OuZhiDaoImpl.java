@@ -17,4 +17,9 @@ public class OuZhiDaoImpl implements OuZhiDao {
 		ouZhiMapper.insertOuZhi(ouZhi);
 	}
 
+	@Override
+	public void initOuZhi(String tableName, OuZhi ouZhi) {
+		ouZhiMapper.initOuZhi(tableName, ouZhi);	
+	}
+
 }

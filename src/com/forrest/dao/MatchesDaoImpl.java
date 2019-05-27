@@ -9,6 +9,7 @@ import com.forrest.mapper.MatchesMapper;
 import com.forrest.model.BiFa;
 import com.forrest.model.Matches;
 import com.forrest.model.MatchesGoal;
+import com.forrest.model.OuZhi;
 
 @Repository
 public class MatchesDaoImpl implements MatchesDao {
@@ -34,7 +35,7 @@ public class MatchesDaoImpl implements MatchesDao {
 	}
 
 	@Override
-	public void updateMEvent(MatchesGoal matchesGoal){
+	public void updateMEvent(MatchesGoal matchesGoal) {
 		matchesMapper.updateMEvent(matchesGoal);
 	}
 
@@ -42,4 +43,28 @@ public class MatchesDaoImpl implements MatchesDao {
 	public void updateBifa(BiFa biFa) {
 		matchesMapper.updateBifa(biFa);
 	}
+
+	@Override
+	public void initMatches(String tableName, List<Matches> list) {
+		matchesMapper.initMatches(tableName, list);
+
+	}
+
+	@Override
+	public List<Integer> selectMidFromMatches(String tableName1, String tableName2) {
+		return matchesMapper.selectMidFromMatches(tableName1, tableName2);
+	}
+
+	@Override
+	public void updateMatches(String tableName1, String tableName2, MatchesGoal mg) {
+		matchesMapper.updateMatches(tableName1, tableName2, mg);
+		
+	}
+
+	@Override
+	public Matches selectFromMatches(String tableName, int mid) {
+	return	matchesMapper.selectFromMatches(tableName, mid);
+		
+	}
+
 }

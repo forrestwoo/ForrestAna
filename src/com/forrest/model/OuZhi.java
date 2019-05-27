@@ -34,7 +34,49 @@ public class OuZhi {
 	private float dd2;
 	private float dd3;
 
+	private float bifa1;
+	private float bifa2;
+	private float bifa3;
 	
+	private float bifa11;
+	private float bifa22;
+	private float bifa33;
+	public float getBifa1() {
+		return bifa1;
+	}
+	public void setBifa1(float bifa1) {
+		this.bifa1 = bifa1;
+	}
+	public float getBifa2() {
+		return bifa2;
+	}
+	public void setBifa2(float bifa2) {
+		this.bifa2 = bifa2;
+	}
+	public float getBifa3() {
+		return bifa3;
+	}
+	public void setBifa3(float bifa3) {
+		this.bifa3 = bifa3;
+	}
+	public float getBifa11() {
+		return bifa11;
+	}
+	public void setBifa11(float bifa11) {
+		this.bifa11 = bifa11;
+	}
+	public float getBifa22() {
+		return bifa22;
+	}
+	public void setBifa22(float bifa22) {
+		this.bifa22 = bifa22;
+	}
+	public float getBifa33() {
+		return bifa33;
+	}
+	public void setBifa33(float bifa33) {
+		this.bifa33 = bifa33;
+	}
 	public int getMid() {
 		return mid;
 	}

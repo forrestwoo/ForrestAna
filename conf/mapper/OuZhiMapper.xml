@@ -3,8 +3,20 @@
 <mapper namespace="com.forrest.mapper.OuZhiMapper">
 	<insert id="insertOuZhi" parameterType="ouZhi">
 		insert into country
-		(mid,a1,a2,a3,aa1,aa2,aa3,b1,b2,b3,bb1,bb2,bb3,c1,c2,c3,cc1,cc2,cc3,d1,d2,d3,dd1,dd2,dd3)
+		(mid,a1,a2,a3,aa1,aa2,aa3,b1,b2,b3,bb1,bb2,bb3,c1,c2,c3,cc1,cc2,cc3,d1,d2,d3,dd1,dd2,dd3,bifa1,bifa2,bifa3,bifa11,bifa22,bifa33)
 		value
-		(#{mid},#{a1},#{a2},#{a3},#{aa1},#{aa2},#{aa3},#{b1},#{b2},#{b3},#{bb1},#{bb2},#{bb3},#{c1},#{c2},#{c3},#{cc1},#{cc2},#{cc3},#{d1},#{d2},#{d3},#{dd1},#{dd2},#{dd3})
+		(#{mid},#{a1},#{a2},#{a3},#{aa1},#{aa2},#{aa3},#{b1},#{b2},#{b3},#{bb1},#{bb2},#{bb3},#{c1},#{c2},#{c3},#{cc1},#{cc2},#{cc3},#{d1},#{d2},#{d3},#{dd1},#{dd2},#{dd3},#{bifa1},#{bifa2},#{bifa3},#{bifa11},#{bifa22},#{bifa33})
+	</insert>
+	
+	<insert id="initOuZhi">
+		insert  into ${tableName}
+		(mid,a1,a2,a3,aa1,aa2,aa3,b1,b2,b3,bb1,bb2,bb3,c1,c2,c3,cc1,cc2,cc3,d1,d2,d3,dd1,dd2,dd3,bifa1,bifa2,bifa3,bifa11,bifa22,bifa33)
+		value
+		(#{ouZhi.mid},#{ouZhi.a1},#{ouZhi.a2},#{ouZhi.a3},#{ouZhi.aa1},#{ouZhi.aa2},
+		#{ouZhi.aa3},#{ouZhi.b1},#{ouZhi.b2},#{ouZhi.b3},#{ouZhi.bb1},#{ouZhi.bb2},
+		#{ouZhi.bb3},#{ouZhi.c1},#{ouZhi.c2},#{ouZhi.c3},#{ouZhi.cc1},#{ouZhi.cc2},
+		#{ouZhi.cc3},#{ouZhi.d1},#{ouZhi.d2},#{ouZhi.d3},#{ouZhi.dd1},#{ouZhi.dd2},
+		#{ouZhi.dd3},#{ouZhi.bifa1},#{ouZhi.bifa2},#{ouZhi.bifa3},#{ouZhi.bifa11},#{ouZhi.bifa22},#{ouZhi.bifa33})
+
 	</insert>
 </mapper>

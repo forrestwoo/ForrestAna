@@ -50,4 +50,69 @@
 		</set>
 		where mid=#{mid}
 	</update>
+	
+	<insert id="initMatches" parameterType="java.util.List">
+		insert ignore into
+		${tableName}(fid,stime,hname,gname,hscore,gscore,hhalfscore,ghalfscore,hstanding,gstanding,round,hid,gid,status,win,draw,lost,pan,handline)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.fid},#{item.stime},#{item.hname},#{item.gname},#{item.hscore},#{item.gscore},#{item.hhalfscore},#{item.ghalfscore},#{item.hstanding},#{item.gstanding},#{item.round},#{item.hid},#{item.gid},#{item.status},
+			#{item.win},#{item.draw},#{item.lost},#{item.pan},#{item.handline})
+		</foreach>
+	</insert>
+	
+	<select id="selectMidFromMatches" resultType="java.lang.Integer" parameterType="java.lang.String" statementType="STATEMENT">
+		select fid
+		from ${tableName1} where fid not in (select mid from ${tableName2})
+	</select>
+	
+	<select id="selectFromMatches" resultType="matches" statementType="STATEMENT">
+		select * from ${tableName} where fid = ${mid}
+	</select>
+	
+	<update id="updateMatches" parameterType="matchesGoal">
+		update ${tableName1}
+		<set>
+			<if test="mg.zhudui != null">zhudui=#{mg.zhudui},</if>
+			<if test="mg.kedui != null">kedui=#{mg.kedui},</if>
+			<if test="mg.score != null">score=#{mg.score},</if>
+			<if test="mg.result != null">result=#{mg.result},</if>
+			<if test="mg.zs != null">zs=#{mg.zs},</if>
+			<if test="mg.ks != null">ks=#{mg.ks},</if>
+			<if test="mg.zh != null">zh=#{mg.zh},</if>
+			<if test="mg.kh != null">kh=#{mg.kh},</if>
+			<if test="mg.m1 != null">m1=#{mg.m1},</if>
+			<if test="mg.m2 != null">m2=#{mg.m2},</if>
+			<if test="mg.m3 != null">m3=#{mg.m3},</if>
+			<if test="mg.zgt != null">zgt=#{mg.zgt},</if>
+			<if test="mg.kgt != null">kgt=#{mg.kgt},</if>
+			<if test="mg.a1 != null">wlzzs=#{mg.a1},</if>
+			<if test="mg.a2 != null">wlzp=#{mg.a2},</if>
+			<if test="mg.a3 != null">wlzks=#{mg.a3},</if>
+			<if test="mg.b1 != null">weidezhongzhushui=#{mg.b1},</if>
+			<if test="mg.b2 != null">weidezhongpan=#{mg.b2},</if>
+			<if test="mg.b3 != null">weidezhongkeshui=#{mg.b3},</if>
+			<if test="mg.aa1 != null">wlczs=#{mg.aa1},</if>
+			<if test="mg.aa2 != null">wlcp=#{mg.aa2},</if>
+			<if test="mg.aa3 != null">wlcks=#{mg.aa3},</if>
+			<if test="mg.bb1 != null">weidechuzhushui=#{mg.bb1},</if>
+			<if test="mg.bb2 != null">weidechupan=#{mg.bb2},</if>
+			<if test="mg.bb3 != null">weidechukeshui=#{mg.bb3},</if>
+			<if test="mg.c1 != null">wlzd=#{mg.c1},</if>
+			<if test="mg.c2 != null">wlzq=#{mg.c2},</if>
+			<if test="mg.c3 != null">wlzx=#{mg.c3},</if>
+			<if test="mg.cc1 != null">wlcd=#{mg.cc1},</if>
+			<if test="mg.cc2 != null">wlcq=#{mg.cc2},</if>
+			<if test="mg.cc3 != null">wlcx=#{mg.cc3},</if>
+			<if test="mg.d1 != null">weidezhongdashui=#{mg.d1},</if>
+			<if test="mg.d2 != null">weidezhongdaxiaopan=#{mg.d2},</if>
+			<if test="mg.d3 != null">weidezhongxiaoshui=#{mg.d3},</if>
+			<if test="mg.dd1 != null">weidechudashui=#{mg.dd1},</if>
+			<if test="mg.dd2 != null">weidechudaxiaopan=#{mg.dd2},</if>
+			<if test="mg.dd3 != null">weidechuxiaoshui=#{mg.dd3},</if>
+		</set>
+		where mid=${mg.mid}
+	</update>
+
 </mapper>

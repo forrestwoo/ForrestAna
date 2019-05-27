@@ -262,7 +262,7 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="initYingChao" target="menuFrame"><i
+							<li><a href="initData" target="menuFrame"><i
 									class="fa fa-circle-o"></i>英超数据</a></li>
 									<li><a href="initXiJia" target="menuFrame"><i
 									class="fa fa-circle-o"></i>西甲数据</a></li>
