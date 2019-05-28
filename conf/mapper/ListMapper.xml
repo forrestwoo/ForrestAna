@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.forrest.mapper.ListMapper">
-	<insert id="insertList" parameterType = "list">
-	insert into list (id,userid,name,favorite,followers,response,create_date,update_date,browse,rids)   
-    value(#{id},#{userid},#{name},#{favorite},#{followers},#{response},#{create_date},#{update_date},#{browse},#{rids})  
-	</insert>
-</mapper>

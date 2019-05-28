@@ -66,50 +66,6 @@
 		<property name="configLocation" value="classpath:myBatisConfig.xml" />
 	</bean>
 
-	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.forrest.mapper.UserMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-	<bean id="restoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.forrest.mapper.RestoMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-	<bean id="cityInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.forrest.mapper.CityInfoMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-	<bean id="cookStyleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.forrest.mapper.CookStyleMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-	<bean id="reviewMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.forrest.mapper.ReviewMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-	<bean id="listMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.forrest.mapper.ListMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-	<bean id="listResponseMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.forrest.mapper.ListResponseMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-	<bean id="memberMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.forrest.mapper.MemberMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-	<bean id="topicMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.forrest.mapper.TopicMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-		<bean id="tempTableMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.forrest.mapper.TempTableMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-		<bean id="ipMessageMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.forrest.mapper.IPMessageMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
 		<bean id="matchesMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.forrest.mapper.MatchesMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />

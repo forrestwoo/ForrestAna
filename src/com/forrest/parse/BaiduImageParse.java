@@ -21,8 +21,8 @@ import org.jsoup.nodes.Document;
 
 public class BaiduImageParse {
 	public static void getImages() throws Exception {
-		String downloadPath = "F:\\高清壁纸";  
-        List<String> list = nameList("1920x1080高清壁纸");  
+		String downloadPath = "F:\\高清壁纸梅西";  
+        List<String> list = nameList("1920x1080高清壁纸梅西");  
         getPictures(list,10,downloadPath); //1代表下载一页，一页一般有30张图片  
 	}
 	

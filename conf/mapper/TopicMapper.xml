@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.forrest.mapper.TopictMapper">
-
-	<insert id="insertTopic" parameterType = "topic">
-	insert into topic (id,userid,hot,content,photos,response,create_date,edit_date,is_root,topic_id,title)   
-    value(#{id},#{userid},#{hot},#{content},#{photos},#{response},#{create_date},#{edit_date},#{is_root},#{topic_id},#{title})  
-	</insert>
-</mapper>

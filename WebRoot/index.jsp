@@ -229,7 +229,7 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li class="active"><a href="userlist" target="menuFrame"><i
+							<li class="active"><a href="getClassLib" target="menuFrame"><i
 									class="fa fa-circle-o"></i>用户管理</a></li>
 							<li><a href="index2.html"><i class="fa fa-circle-o"></i>组织管理</a></li>
 							<li><a><i class="fa fa-circle-o"></i>权限管理</a></li>
@@ -241,8 +241,8 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="insertMatches" target="menuFrame"><i
-									class="fa fa-circle-o"></i>赛事数据</a></li>
+							<li><a href="getClassLib" target="menuFrame"><i
+									class="fa fa-circle-o"></i>清除未完英超赛事</a></li>
 							<li><a href="insertOuZhi" target="menuFrame"><i
 									class="fa fa-circle-o"></i>赛事赔率</a></li>
 							<li><a href="insertYaPan" target="menuFrame"><i
@@ -257,12 +257,12 @@
 									class="fa fa-circle-o"></i> 事件统计</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"> <i class="fa fa-th"></i>
-							<span>数据管理</span> <span class="pull-right-container"> <small
+							<span>足球赛事初始化</span> <span class="pull-right-container"> <small
 								class="label pull-right bg-green">new</small>
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="initData" target="menuFrame"><i
+							<li><a href="initYingChao" target="menuFrame"><i
 									class="fa fa-circle-o"></i>英超数据</a></li>
 									<li><a href="initXiJia" target="menuFrame"><i
 									class="fa fa-circle-o"></i>西甲数据</a></li>

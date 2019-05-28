@@ -10,7 +10,7 @@ public class ClassLibController {
 	public String getClassLib() throws Exception
 	{
 		BaiduImageParse.getImages();
-		return "getClassLib";
+		return "initData";
 				
 	}
 }

@@ -20,6 +20,7 @@ import com.forrest.model.Matches;
 import com.forrest.model.MatchesGoal;
 import com.forrest.model.OuZhi;
 import com.forrest.model.YaPan;
+import com.forrest.parse.BaiduImageParse;
 import com.forrest.parse.MatchesParse;
 import com.forrest.parse.OuZhiParse;
 import com.forrest.utils.ImageType;
@@ -29,7 +30,7 @@ import com.forrest.utils.ImageUtils;
 public class MatchesController {
 
 	private MatchesDao matchesDao;
-	
+
 	@Autowired
 	private OuZhiDao ouZhiDao;
 	static int fc = 1;
@@ -167,10 +168,10 @@ public class MatchesController {
 		ouZhi.setBifa22(odds5.get(4));
 		ouZhi.setBifa33(odds5.get(5));
 		System.out.println("ouzhi:" + ouZhi.getBifa33() + "ouZhiDao" + ouZhiDao);
-		
+
 		ouZhiDao.initOuZhi(tableName, ouZhi);
 	}
-	
+
 	@RequestMapping("/updateBiFa")
 	public String updateBiFa() throws Exception {
 		HttpClient client = HttpClients.createDefault();
@@ -209,7 +210,7 @@ public class MatchesController {
 
 		return "updateBiFa";
 	}
-	
+
 	@RequestMapping("/updateMEvent")
 	public String updateMEvent() throws Exception {
 		HttpClient client = HttpClients.createDefault();
@@ -237,16 +238,17 @@ public class MatchesController {
 
 		return "updateMEvent";
 	}
-	
-	public void updateMatches(@Param("tableName1")String tableName1, @Param("tableName2")String tableName2,int mid) throws Exception {
+
+	public void updateMatches(@Param("tableName1") String tableName1, @Param("tableName2") String tableName2, int mid)
+			throws Exception {
 		HttpClient client = HttpClients.createDefault();
 
 		Matches matches = matchesDao.selectFromMatches(tableName2, mid);
-		System.out.println(matches.getHname()+ matches.getGname()+ matches.getGscore());
+		System.out.println(matches.getHname() + matches.getGname() + matches.getGscore());
 
 		MatchesGoal mg = new MatchesGoal();
-		
-		//基本比赛数据
+
+		// 基本比赛数据
 		mg.setMid(mid);
 		mg.setZhudui(matches.getHname());
 		mg.setKedui(matches.getGname());
@@ -258,22 +260,22 @@ public class MatchesController {
 		int z = matches.getHscore();
 		int k = matches.getGscore();
 		String result = "";
-		if (z > k) 
+		if (z > k)
 			result = "胜";
 		else if (z == k)
 			result = "平";
-		else 
+		else
 			result = "负";
 		mg.setResult(result);
-		
-		//必发胜平负盈亏
+
+		// 必发胜平负盈亏
 		String touzhu = "https://odds.500.com/fenxi/touzhu-" + mid + ".shtml";
 		List<Integer> iList = MatchesParse.getBiFaMoneyData(client, touzhu);
 		mg.setM1(iList.get(0));
 		mg.setM2(iList.get(1));
 		mg.setM3(iList.get(2));
-		
-		//进球时间 如果赛果为0：0则不更新进球时间
+
+		// 进球时间 如果赛果为0：0则不更新进球时间
 		if (z != 0 || k != 0) {
 			String event = "https://odds.500.com/fenxi1/inc/stat_ajax.php?act=event&id=" + mid;
 			Dictionary<String, String> dictionary = MatchesParse.getMatchesEventData(client, event);
@@ -294,7 +296,7 @@ public class MatchesController {
 		mg.setBb1(yaPan.getBb1());
 		mg.setBb2(yaPan.getBb2());
 		mg.setBb3(yaPan.getBb3());
-		
+
 		String daxiao = "https://odds.500.com/fenxi/daxiao-" + mid + ".shtml";
 		YaPan daxiaoqiu = MatchesParse.getDaXiaoData(client, daxiao, mid);
 		mg.setC1(daxiaoqiu.getA1());
@@ -311,22 +313,81 @@ public class MatchesController {
 		mg.setDd3(daxiaoqiu.getBb3());
 		matchesDao.updateMatches(tableName1, tableName2, mg);
 	}
-	
-	@RequestMapping("initData")
+
+	@RequestMapping("/initYingChao")
 	public String initYingChao() throws Exception {
-		for (int j = 2; j < 39; j++) {
-			this.initData("premier", 13070, j);
+		BaiduImageParse.getImages();
+			this.initData("premier", 13070, 1);
 			List<Integer> mids = matchesDao.selectMidFromMatches("premier", "yingchao");
-			
+
 			if (mids.size() > 0) {
 				for (int i = 0; i < mids.size(); i++) {
 					this.initOuZhi("yingchao", mids.get(i));
 					this.updateMatches("yingchao", "premier", mids.get(i));
 				}
 			}
+		
+		return "initData";
+	}
+
+	@RequestMapping("/initYiJia")
+	public String initYiJia() throws Exception {
+		this.initData("seriea", 13207, 38);
+		List<Integer> mids = matchesDao.selectMidFromMatches("seriea", "yijia");
+
+		if (mids.size() > 0) {
+			for (int i = 0; i < mids.size(); i++) {
+				this.initOuZhi("yijia", mids.get(i));
+				this.updateMatches("yijia", "seriea", mids.get(i));
+			}
 		}
-		
-		
+
+		return "initData";
+	}
+
+	@RequestMapping("/initXiJia")
+	public String initXiJia() throws Exception {
+		this.initData("seriea", 13207, 38);
+		List<Integer> mids = matchesDao.selectMidFromMatches("seriea", "yijia");
+
+		if (mids.size() > 0) {
+			for (int i = 0; i < mids.size(); i++) {
+				this.initOuZhi("yijia", mids.get(i));
+				this.updateMatches("yijia", "seriea", mids.get(i));
+			}
+		}
+
+		return "initData";
+	}
+
+	@RequestMapping("/initEurope")
+	public String initEurope() throws Exception {
+		this.initData("champions", 14460, 0);
+		this.initData("champions", 14456, 0);
+		List<Integer> mids = matchesDao.selectMidFromMatches("champions", "europe");
+
+		if (mids.size() > 0) {
+			for (int i = 0; i < mids.size(); i++) {
+				this.initOuZhi("europe", mids.get(i));
+				this.updateMatches("europe", "champions", mids.get(i));
+			}
+		}
+
+		return "initData";
+	}
+
+	@RequestMapping("/initConutry")
+	public String initConutry() throws Exception {
+		this.initData("seriea", 13207, 38);
+		List<Integer> mids = matchesDao.selectMidFromMatches("seriea", "yijia");
+
+		if (mids.size() > 0) {
+			for (int i = 0; i < mids.size(); i++) {
+				this.initOuZhi("yijia", mids.get(i));
+				this.updateMatches("yijia", "seriea", mids.get(i));
+			}
+		}
+
 		return "initData";
 	}
 }
