@@ -27,4 +27,5 @@ public interface MatchesDao {
 	public void updateMatches(@Param("tableName1")String tableName1, @Param("tableName2")String tableName2,@Param("mg")MatchesGoal mg);
 
 	public Matches selectFromMatches(@Param("tableName")String tableName,@Param("mid")int mid);
+	public List<Integer> selectMidPan();
 }

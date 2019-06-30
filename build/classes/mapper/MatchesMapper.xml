@@ -50,7 +50,7 @@
 		</set>
 		where mid=#{mid}
 	</update>
-	
+
 	<insert id="initMatches" parameterType="java.util.List">
 		insert ignore into
 		${tableName}(fid,stime,hname,gname,hscore,gscore,hhalfscore,ghalfscore,hstanding,gstanding,round,hid,gid,status,win,draw,lost,pan,handline)
@@ -61,16 +61,25 @@
 			#{item.win},#{item.draw},#{item.lost},#{item.pan},#{item.handline})
 		</foreach>
 	</insert>
-	
-	<select id="selectMidFromMatches" resultType="java.lang.Integer" parameterType="java.lang.String" statementType="STATEMENT">
+
+	<select id="selectMidFromMatches" resultType="java.lang.Integer"
+		parameterType="java.lang.String" statementType="STATEMENT">
 		select fid
-		from ${tableName1} where fid not in (select mid from ${tableName2})
+		from
+		${tableName1} where fid not in (select mid from ${tableName2})
 	</select>
-	
-	<select id="selectFromMatches" resultType="matches" statementType="STATEMENT">
+
+	<select id="selectMidPan" resultType="matches">
+		select *
+		from xijia where
+		weidechupan='平手/半球' or weidechupan='平手' or weidechupan='让平手/半球'
+	</select>
+
+	<select id="selectFromMatches" resultType="matches"
+		statementType="STATEMENT">
 		select * from ${tableName} where fid = ${mid}
 	</select>
-	
+
 	<update id="updateMatches" parameterType="matchesGoal">
 		update ${tableName1}
 		<set>

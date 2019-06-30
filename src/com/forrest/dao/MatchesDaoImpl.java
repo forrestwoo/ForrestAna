@@ -67,4 +67,9 @@ public class MatchesDaoImpl implements MatchesDao {
 		
 	}
 
+	@Override
+	public List<Integer> selectMidPan() {
+		return matchesMapper.selectMidPan();
+	}
+
 }
