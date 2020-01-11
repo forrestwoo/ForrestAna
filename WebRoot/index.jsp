@@ -241,8 +241,8 @@
 						</span>
 					</a>
 						<ul class="treeview-menu">
-							<li><a href="getClassLib" target="menuFrame"><i
-									class="fa fa-circle-o"></i>清除未完英超赛事</a></li>
+							<li><a href="getMData" target="menuFrame"><i
+									class="fa fa-circle-o"></i>查询数据</a></li>
 							<li><a href="insertOuZhi" target="menuFrame"><i
 									class="fa fa-circle-o"></i>赛事赔率</a></li>
 							<li><a href="insertYaPan" target="menuFrame"><i
@@ -269,9 +269,9 @@
 							<li><a href="initYiJia" target="menuFrame"><i
 									class="fa fa-circle-o"></i>意甲数据</a></li>
 							<li><a href="initDeJia" target="menuFrame"><i
-									class="fa fa-circle-o"></i>德甲数据</a></li>
+									class="fa fa-circle-o"></i>暂无</a></li>
 							<li><a href="initFaJia" target="menuFrame"><i
-									class="fa fa-circle-o"></i>法甲数据</a></li>
+									class="fa fa-circle-o"></i>俄超数据</a></li>
 							<li><a href="initEurope" target="menuFrame"><i
 									class="fa fa-circle-o"></i>歐洲俱樂部数据</a></li>
 							<li><a href="initConutry" target="menuFrame"><i

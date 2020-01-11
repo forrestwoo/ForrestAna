@@ -35,7 +35,10 @@ public class MatchesParse {
 		Dictionary<String, String> dictionary = new Hashtable<>();
 		String zgString = "", kgString = "";
 		String lgg = "";
+		System.out.println("client:" + client);
+		System.out.println("url:" + url);
 		Document doc = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
+		
 		String dataString = doc.select("body").text();
 		JSONObject jsonObject = JSONObject.parseObject(dataString);
 
@@ -43,7 +46,7 @@ public class MatchesParse {
 		for (int i = 0; i < jsonArray.size(); i++) {
 			jsonObject = (JSONObject) jsonArray.get(i);
 			if (jsonObject.getString("type").equals("goal") || jsonObject.getString("type").equals("goal-kick")
-					|| jsonObject.getString("type").equals("goal-own")) {
+					|| jsonObject.getString("8type").equals("goal-own")) {
 				if (Integer.parseInt(jsonObject.getString("is_home")) == 1) {
 					if (zgString.length() < 1) {
 						zgString = jsonObject.getString("time");

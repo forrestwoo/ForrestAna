@@ -167,7 +167,6 @@ public class MatchesController {
 		ouZhi.setBifa11(odds5.get(3));
 		ouZhi.setBifa22(odds5.get(4));
 		ouZhi.setBifa33(odds5.get(5));
-		System.out.println("ouzhi:" + ouZhi.getBifa33() + "ouZhiDao" + ouZhiDao);
 
 		ouZhiDao.initOuZhi(tableName, ouZhi);
 	}
@@ -252,9 +251,9 @@ public class MatchesController {
 		mg.setMid(mid);
 		mg.setZhudui(matches.getHname());
 		mg.setKedui(matches.getGname());
-		mg.setZs(matches.getHscore());
 		mg.setKs(matches.getGscore());
 		mg.setZh(matches.getHhalfscore());
+		mg.setZs(matches.getHscore());
 		mg.setKh(matches.getGhalfscore());
 		mg.setScore(matches.getHscore() + ":" + matches.getGscore());
 		int z = matches.getHscore();
@@ -276,15 +275,18 @@ public class MatchesController {
 		mg.setM3(iList.get(2));
 
 		// 进球时间 如果赛果为0：0则不更新进球时间
-		if (z != 0 || k != 0) {
+		/*
+	if (z != 0 || k != 0) {
 			String event = "https://odds.500.com/fenxi1/inc/stat_ajax.php?act=event&id=" + mid;
 			Dictionary<String, String> dictionary = MatchesParse.getMatchesEventData(client, event);
 			mg.setZgt(dictionary.get("zg"));
 			mg.setKgt(dictionary.get("kg"));
 		}
+		 * */
+	
 		String yazhi = "https://odds.500.com/fenxi/yazhi-" + mid + ".shtml";
 		YaPan yaPan = MatchesParse.getYaPanData(client, yazhi, mid);
-		if (yaPan!=null) {
+		if (yaPan != null) {
 			mg.setA1(yaPan.getA1());
 			mg.setA2(yaPan.getA2());
 			mg.setA3(yaPan.getA3());
@@ -301,7 +303,7 @@ public class MatchesController {
 
 		String daxiao = "https://odds.500.com/fenxi/daxiao-" + mid + ".shtml";
 		YaPan daxiaoqiu = MatchesParse.getDaXiaoData(client, daxiao, mid);
-		if (daxiaoqiu!=null) {
+		if (daxiaoqiu != null) {
 			mg.setC1(daxiaoqiu.getA1());
 			mg.setC2(daxiaoqiu.getA2());
 			mg.setC3(daxiaoqiu.getA3());
@@ -315,29 +317,28 @@ public class MatchesController {
 			mg.setDd2(daxiaoqiu.getBb2());
 			mg.setDd3(daxiaoqiu.getBb3());
 		}
-		
+
 		matchesDao.updateMatches(tableName1, tableName2, mg);
 	}
 
 	@RequestMapping("/initYingChao")
 	public String initYingChao() throws Exception {
-		BaiduImageParse.getImages();
-			this.initData("premier", 13070, 1);
-			List<Integer> mids = matchesDao.selectMidFromMatches("premier", "yingchao");
+		this.initData("premier", 14789, 13);
+		List<Integer> mids = matchesDao.selectMidFromMatches("premier", "yingchao");
 
-			if (mids.size() > 0) {
-				for (int i = 0; i < mids.size(); i++) {
-					this.initOuZhi("yingchao", mids.get(i));
-					this.updateMatches("yingchao", "premier", mids.get(i));
-				}
+		if (mids.size() > 0) {
+			for (int i = 0; i < mids.size(); i++) {
+				this.initOuZhi("yingchao", mids.get(i));
+				this.updateMatches("yingchao", "premier", mids.get(i));
 			}
-		
+		}
+
 		return "initData";
 	}
 
 	@RequestMapping("/initYiJia")
 	public String initYiJia() throws Exception {
-		this.initData("seriea", 13207, 38);
+		this.initData("seriea", 15160, 13);
 		List<Integer> mids = matchesDao.selectMidFromMatches("seriea", "yijia");
 
 		if (mids.size() > 0) {
@@ -352,39 +353,45 @@ public class MatchesController {
 
 	@RequestMapping("/initXiJia")
 	public String initXiJia() throws Exception {
-			this.initData("laliga", 6902, 1);
-			List<Integer> mids = matchesDao.selectMidFromMatches("laliga", "xijia");
-
-			if (mids.size() > 0) {
-				for (int i = 0; i < mids.size(); i++) {
-					this.initOuZhi("xijia", mids.get(i));
-					this.updateMatches("xijia", "laliga", mids.get(i));
-				}
-			}
 		
+		
+		this.initData("laliga", 14981, 19);
+		List<Integer> mids = matchesDao.selectMidFromMatches("laliga", "xijia");
 
-		return "initData";
-	}
-	
-	@RequestMapping("/initDeJia")
-	public String initDeJia() throws Exception {
-		List<Integer> mids = matchesDao.selectMidPan();
-		int m = 0;
-		for (int i = 0; i < mids.size(); i++) {
-			Matches matches = matchesDao.selectFromMatches(null, mids.get(i));
-			if (matches.) {
-				
+		if (mids.size() > 0) {
+			for (int i = 0; i < mids.size(); i++) {
+				this.initOuZhi("xijia", mids.get(i));
+				this.updateMatches("xijia", "laliga", mids.get(i));
 			}
 		}
-	
 
 		return "initData";
 	}
 
+	@RequestMapping("/initDeJia")
+	public String initDeJia() throws Exception {
+
+		return "initData";
+	}
+
+	// 俄超
 	@RequestMapping("/initFaJia")
 	public String initFaJia() throws Exception {
-		for (int j = 1; j < 39; j++) {
-			this.initData("ligue1", 13051, j);
+		
+		
+		 this.initData("ligue1", 14783, 12);
+		List<Integer> mids = matchesDao.selectMidFromMatches("ligue1", "fajia");
+
+		if (mids.size() > 0) {
+			for (int i = 0; i < mids.size(); i++) {
+				this.initOuZhi("fajia", mids.get(i));
+				this.updateMatches("fajia", "ligue1", mids.get(i));
+			}
+		}
+		 
+		/**
+		for (int m = 6; m < 31; m++) {
+			this.initData("ligue1", 11750, m);
 			List<Integer> mids = matchesDao.selectMidFromMatches("ligue1", "fajia");
 
 			if (mids.size() > 0) {
@@ -394,15 +401,25 @@ public class MatchesController {
 				}
 			}
 		}
-		
+		 * */
+	
+	
 
 		return "initData";
 	}
 
 	@RequestMapping("/initEurope")
 	public String initEurope() throws Exception {
-		this.initData("champions", 14308, 1);
-		this.initData("champions", 14456, 2);
+		// 欧冠
+		this.initData("champions", 15276, 1);
+		this.initData("champions", 15276, 2);
+
+
+		// 欧联
+		this.initData("champions", 15296, 1);
+		this.initData("champions", 15296, 2);
+		this.initData("champions", 15180, 1);
+		this.initData("champions", 15180, 2);
 		List<Integer> mids = matchesDao.selectMidFromMatches("champions", "europe");
 
 		if (mids.size() > 0) {
@@ -417,16 +434,21 @@ public class MatchesController {
 
 	@RequestMapping("/initConutry")
 	public String initConutry() throws Exception {
-		this.initData("seriea", 13207, 38);
-		List<Integer> mids = matchesDao.selectMidFromMatches("seriea", "yijia");
+		this.initData("europecup", 13207, 38);
+		List<Integer> mids = matchesDao.selectMidFromMatches("europecup", "country");
 
 		if (mids.size() > 0) {
 			for (int i = 0; i < mids.size(); i++) {
-				this.initOuZhi("yijia", mids.get(i));
-				this.updateMatches("yijia", "seriea", mids.get(i));
+				this.initOuZhi("country", mids.get(i));
+				this.updateMatches("country", "europecup", mids.get(i));
 			}
 		}
 
 		return "initData";
+	}
+
+	@RequestMapping("/getMData")
+	public String getMData() {
+		return "getData";
 	}
 }
