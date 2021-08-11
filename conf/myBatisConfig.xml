@@ -4,16 +4,11 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="matches" type="com.forrest.model.Matches" />
-		<typeAlias alias="ouZhi" type="com.forrest.model.OuZhi" />
-		<typeAlias alias="yaPan" type="com.forrest.model.YaPan" />
 		<typeAlias alias="matchesGoal" type="com.forrest.model.MatchesGoal" />
-		<typeAlias alias="biFa" type="com.forrest.model.BiFa" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/MatchesMapper.xml" />
-		<mapper resource="mapper/OuZhiMapper.xml" />
-		<mapper resource="mapper/YaPanMapper.xml" />
 	</mappers>
 
 </configuration> 

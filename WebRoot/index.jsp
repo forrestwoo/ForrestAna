@@ -268,14 +268,14 @@
 									class="fa fa-circle-o"></i>西甲数据</a></li>
 							<li><a href="initYiJia" target="menuFrame"><i
 									class="fa fa-circle-o"></i>意甲数据</a></li>
+							<li><a href="initBiJia" target="menuFrame"><i
+									class="fa fa-circle-o"></i>比甲数据</a></li>
 							<li><a href="initDeJia" target="menuFrame"><i
-									class="fa fa-circle-o"></i>暂无</a></li>
+									class="fa fa-circle-o"></i>德甲数据</a></li>
 							<li><a href="initFaJia" target="menuFrame"><i
-									class="fa fa-circle-o"></i>俄超数据</a></li>
-							<li><a href="initEurope" target="menuFrame"><i
-									class="fa fa-circle-o"></i>歐洲俱樂部数据</a></li>
-							<li><a href="initConutry" target="menuFrame"><i
-									class="fa fa-circle-o"></i>國家数据</a></li>
+									class="fa fa-circle-o"></i>法甲数据</a></li>
+							<li><a href="initPuChao" target="menuFrame"><i
+									class="fa fa-circle-o"></i>葡超数据</a></li>
 						</ul></li>
 				</ul>
 				<!-- /.sidebar-menu -->

@@ -17,6 +17,7 @@ public class OuZhiParse {
 	public static List<Float> getData(HttpClient client, String url) throws Exception {
 		Document doc = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
 		String dataString = doc.select("body").text();
+		System.out.println("url" + dataString+url);
 		List<Object> list = JSONObject.parseArray(dataString);
 		List<Float> odds = new ArrayList<>();
 		if (list.size() == 0) {

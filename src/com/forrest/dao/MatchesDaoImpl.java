@@ -56,12 +56,6 @@ public class MatchesDaoImpl implements MatchesDao {
 	}
 
 	@Override
-	public void updateMatches(String tableName1, String tableName2, MatchesGoal mg) {
-		matchesMapper.updateMatches(tableName1, tableName2, mg);
-		
-	}
-
-	@Override
 	public Matches selectFromMatches(String tableName, int mid) {
 	return	matchesMapper.selectFromMatches(tableName, mid);
 		
@@ -70,6 +64,11 @@ public class MatchesDaoImpl implements MatchesDao {
 	@Override
 	public List<Integer> selectMidPan() {
 		return matchesMapper.selectMidPan();
+	}
+
+	@Override
+	public void updateMatches(String tableName1, MatchesGoal mg) {
+		matchesMapper.updateMatches(tableName1, mg);		
 	}
 
 }

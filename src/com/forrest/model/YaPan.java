@@ -6,17 +6,10 @@ public class YaPan {
 	private String a2;
 	private String a3;
 	
-	private String b1;
-	private String b2;
-	private String b3;
-	
 	private String aa1;
 	private String aa2;
 	private String aa3;
 	
-	private String bb1;
-	private String bb2;
-	private String bb3;
 	public int getMid() {
 		return mid;
 	}
@@ -41,24 +34,7 @@ public class YaPan {
 	public void setA3(String a3) {
 		this.a3 = a3;
 	}
-	public String getB1() {
-		return b1;
-	}
-	public void setB1(String b1) {
-		this.b1 = b1;
-	}
-	public String getB2() {
-		return b2;
-	}
-	public void setB2(String b2) {
-		this.b2 = b2;
-	}
-	public String getB3() {
-		return b3;
-	}
-	public void setB3(String b3) {
-		this.b3 = b3;
-	}
+	
 	public String getAa1() {
 		return aa1;
 	}
@@ -76,24 +52,6 @@ public class YaPan {
 	}
 	public void setAa3(String aa3) {
 		this.aa3 = aa3;
-	}
-	public String getBb1() {
-		return bb1;
-	}
-	public void setBb1(String bb1) {
-		this.bb1 = bb1;
-	}
-	public String getBb2() {
-		return bb2;
-	}
-	public void setBb2(String bb2) {
-		this.bb2 = bb2;
-	}
-	public String getBb3() {
-		return bb3;
-	}
-	public void setBb3(String bb3) {
-		this.bb3 = bb3;
 	}
 
 }

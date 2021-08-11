@@ -13,8 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import com.forrest.dao.MatchesDao;
-import com.forrest.dao.OuZhiDao;
 import com.forrest.model.BiFa;
 import com.forrest.model.Matches;
 import com.forrest.model.MatchesGoal;
@@ -31,8 +35,6 @@ public class MatchesController {
 
 	private MatchesDao matchesDao;
 
-	@Autowired
-	private OuZhiDao ouZhiDao;
 	static int fc = 1;
 
 	public MatchesController(MatchesDao matchesDao) {
@@ -112,149 +114,18 @@ public class MatchesController {
 		}
 	}
 
-	public void initOuZhi(@Param("tableName") String tableName, int mid) throws Exception {
-		HttpClient client = HttpClients.createDefault();
-		String baseUrl = "http://odds.500.com/fenxi1/json/ouzhi.php?fid=";
-		String rootUrl = "";
-		// http://odds.500.com/fenxi1/json/ouzhi.php?fid=748929&cid=293
-		List<Integer> oddCompany = new ArrayList<Integer>();
-		oddCompany.add(293);
-		oddCompany.add(4);
-		oddCompany.add(6);
-		oddCompany.add(8);
-		oddCompany.add(18);
-
-		OuZhi ouZhi = new OuZhi();
-		rootUrl = baseUrl + mid;
-		List<Float> odds1 = OuZhiParse.getData(client, rootUrl + "&cid=" + oddCompany.get(0));
-		List<Float> odds2 = OuZhiParse.getData(client, rootUrl + "&cid=" + oddCompany.get(1));
-		List<Float> odds3 = OuZhiParse.getData(client, rootUrl + "&cid=" + oddCompany.get(2));
-		List<Float> odds4 = OuZhiParse.getData(client, rootUrl + "&cid=" + oddCompany.get(3));
-		List<Float> odds5 = OuZhiParse.getData(client, rootUrl + "&cid=" + oddCompany.get(4));
-
-		ouZhi.setMid(mid);
-		ouZhi.setA1(odds1.get(0));
-		ouZhi.setA2(odds1.get(1));
-		ouZhi.setA3(odds1.get(2));
-		ouZhi.setAa1(odds1.get(3));
-		ouZhi.setAa2(odds1.get(4));
-		ouZhi.setAa3(odds1.get(5));
-
-		ouZhi.setB1(odds2.get(0));
-		ouZhi.setB2(odds2.get(1));
-		ouZhi.setB3(odds2.get(2));
-		ouZhi.setBb1(odds2.get(3));
-		ouZhi.setBb2(odds2.get(4));
-		ouZhi.setBb3(odds2.get(5));
-
-		ouZhi.setC1(odds3.get(0));
-		ouZhi.setC2(odds3.get(1));
-		ouZhi.setC3(odds3.get(2));
-		ouZhi.setCc1(odds3.get(3));
-		ouZhi.setCc2(odds3.get(4));
-		ouZhi.setCc3(odds3.get(5));
-
-		ouZhi.setD1(odds4.get(0));
-		ouZhi.setD2(odds4.get(1));
-		ouZhi.setD3(odds4.get(2));
-		ouZhi.setDd1(odds4.get(3));
-		ouZhi.setDd2(odds4.get(4));
-		ouZhi.setDd3(odds4.get(5));
-
-		ouZhi.setBifa1(odds5.get(0));
-		ouZhi.setBifa2(odds5.get(1));
-		ouZhi.setBifa3(odds5.get(2));
-		ouZhi.setBifa11(odds5.get(3));
-		ouZhi.setBifa22(odds5.get(4));
-		ouZhi.setBifa33(odds5.get(5));
-
-		ouZhiDao.initOuZhi(tableName, ouZhi);
-	}
-
-	@RequestMapping("/updateBiFa")
-	public String updateBiFa() throws Exception {
+	public void updateMatches(@Param("tableName1") String tableName1, int mid) throws Exception {
 		HttpClient client = HttpClients.createDefault();
 
-		String rootUrlString = "http://odds.500.com/fenxi1/json/ouzhi.php?fid=";
-		List<Integer> integers = matchesDao.selectMatcheId();
-
-		for (int i = 0; i < integers.size(); i++) {
-			String urlString = rootUrlString + integers.get(i) + "&cid=18";
-			String uu = "https://odds.500.com/fenxi/touzhu-" + integers.get(i) + ".shtml";
-			List<Integer> iList = MatchesParse.getBiFaMoneyData(client, uu);
-			BiFa biFa = new BiFa();
-			biFa.setM1(iList.get(0));
-			biFa.setM2(iList.get(1));
-			biFa.setM3(iList.get(2));
-
-			List<Float> odds = MatchesParse.getBiFaZhiData(client, urlString);
-			biFa.setBifa1(odds.get(0));
-			biFa.setBifa2(odds.get(1));
-			biFa.setBifa3(odds.get(2));
-			biFa.setBifa11(odds.get(3));
-			biFa.setBifa22(odds.get(4));
-			biFa.setBifa33(odds.get(5));
-			biFa.setMid(integers.get(i));
-			matchesDao.updateBifa(biFa);
-			matchesDao.deleteMatches(integers.get(i));
-
-			String imageurl = "http://liansai.500.com/static/soccerdata/images/TeamPic/teamsignnew_";
-			for (int j = fc; j < fc + 5; j++) {
-				String uuu = imageurl + j + ".png";
-				ImageUtils.saveToFile(uuu, "fc", ImageType.MEMBER);
-			}
-
-			fc += 4;
-		}
-
-		return "updateBiFa";
-	}
-
-	@RequestMapping("/updateMEvent")
-	public String updateMEvent() throws Exception {
-		HttpClient client = HttpClients.createDefault();
-
-		String rootUrlString = "https://odds.500.com/fenxi1/inc/stat_ajax.php?act=event&id=";
-		List<Integer> integers = matchesDao.selectMatcheId();
-
-		for (int i = 0; i < integers.size(); i++) {
-			String urlString = rootUrlString + integers.get(i);
-			Dictionary<String, String> dictionary = MatchesParse.getMatchesEventData(client, urlString);
-			MatchesGoal matchesGoal = new MatchesGoal();
-			matchesGoal.setMid(integers.get(i));
-			matchesGoal.setZgt(dictionary.get("zg"));
-			matchesGoal.setKgt(dictionary.get("kg"));
-			matchesDao.updateMEvent(matchesGoal);
-			matchesDao.deleteMatches(integers.get(i));
-			String imageurl = "http://liansai.500.com/static/soccerdata/images/TeamPic/teamsignnew_";
-			for (int j = fc; j < fc + 5; j++) {
-				String uuu = imageurl + j + ".png";
-				ImageUtils.saveToFile(uuu, "fc", ImageType.MEMBER);
-			}
-
-			fc += 5;
-		}
-
-		return "updateMEvent";
-	}
-
-	public void updateMatches(@Param("tableName1") String tableName1, @Param("tableName2") String tableName2, int mid)
-			throws Exception {
-		HttpClient client = HttpClients.createDefault();
-
-		Matches matches = matchesDao.selectFromMatches(tableName2, mid);
-		System.out.println(matches.getHname() + matches.getGname() + matches.getGscore());
+		Matches matches = matchesDao.selectFromMatches(tableName1, mid);
+		Document document = Jsoup.connect("http://odds.500.com/fenxi/shuju-993362.shtml").get();
+		// System.out.println(matches.getHname() + matches.getGname() +
+		// matches.getGscore());
 
 		MatchesGoal mg = new MatchesGoal();
 
 		// 基本比赛数据
 		mg.setMid(mid);
-		mg.setZhudui(matches.getHname());
-		mg.setKedui(matches.getGname());
-		mg.setKs(matches.getGscore());
-		mg.setZh(matches.getHhalfscore());
-		mg.setZs(matches.getHscore());
-		mg.setKh(matches.getGhalfscore());
 		mg.setScore(matches.getHscore() + ":" + matches.getGscore());
 		int z = matches.getHscore();
 		int k = matches.getGscore();
@@ -266,102 +137,117 @@ public class MatchesController {
 		else
 			result = "负";
 		mg.setResult(result);
-
-		// 必发胜平负盈亏
-		String touzhu = "https://odds.500.com/fenxi/touzhu-" + mid + ".shtml";
-		List<Integer> iList = MatchesParse.getBiFaMoneyData(client, touzhu);
-		mg.setM1(iList.get(0));
-		mg.setM2(iList.get(1));
-		mg.setM3(iList.get(2));
-
-		// 进球时间 如果赛果为0：0则不更新进球时间
-		/*
-	if (z != 0 || k != 0) {
-			String event = "https://odds.500.com/fenxi1/inc/stat_ajax.php?act=event&id=" + mid;
-			Dictionary<String, String> dictionary = MatchesParse.getMatchesEventData(client, event);
-			mg.setZgt(dictionary.get("zg"));
-			mg.setKgt(dictionary.get("kg"));
-		}
-		 * */
-	
 		String yazhi = "https://odds.500.com/fenxi/yazhi-" + mid + ".shtml";
 		YaPan yaPan = MatchesParse.getYaPanData(client, yazhi, mid);
 		if (yaPan != null) {
-			mg.setA1(yaPan.getA1());
-			mg.setA2(yaPan.getA2());
-			mg.setA3(yaPan.getA3());
-			mg.setAa1(yaPan.getAa1());
-			mg.setAa2(yaPan.getAa2());
-			mg.setAa3(yaPan.getAa3());
-			mg.setB1(yaPan.getB1());
-			mg.setB2(yaPan.getB2());
-			mg.setB3(yaPan.getB3());
-			mg.setBb1(yaPan.getBb1());
-			mg.setBb2(yaPan.getBb2());
-			mg.setBb3(yaPan.getBb3());
+			mg.setIcp(yaPan.getAa1());
+			mg.setIcpss(yaPan.getAa2());
+			mg.setIcpxs(yaPan.getAa3());
+			mg.setIzp(yaPan.getA1());
+			mg.setIzpss(yaPan.getA2());
+			mg.setIzpxs(yaPan.getA3());
 		}
-
 		String daxiao = "https://odds.500.com/fenxi/daxiao-" + mid + ".shtml";
 		YaPan daxiaoqiu = MatchesParse.getDaXiaoData(client, daxiao, mid);
 		if (daxiaoqiu != null) {
-			mg.setC1(daxiaoqiu.getA1());
-			mg.setC2(daxiaoqiu.getA2());
-			mg.setC3(daxiaoqiu.getA3());
-			mg.setCc1(daxiaoqiu.getAa1());
-			mg.setCc2(daxiaoqiu.getAa2());
-			mg.setCc3(daxiaoqiu.getAa3());
-			mg.setD1(daxiaoqiu.getB1());
-			mg.setD2(daxiaoqiu.getB2());
-			mg.setD3(daxiaoqiu.getB3());
-			mg.setDd1(daxiaoqiu.getBb1());
-			mg.setDd2(daxiaoqiu.getBb2());
-			mg.setDd3(daxiaoqiu.getBb3());
-		}
 
-		matchesDao.updateMatches(tableName1, tableName2, mg);
+			mg.setIdxp(daxiaoqiu.getAa2());
+			mg.setIdxpd(daxiaoqiu.getAa1());
+			mg.setIdxpx(daxiaoqiu.getAa3());
+		}
+		// http://odds.500.com/fenxi/ouzhi-988158.shtml
+		String ou = "http://odds.500.com/fenxi/ouzhi-" + mid + ".shtml";
+		OuZhi ouzhi = MatchesParse.getOuZhiData(client, ou, mid);
+		mg.setWlcps(ouzhi.getA1());
+		mg.setWlcpp(ouzhi.getA2());
+		mg.setWlcpf(ouzhi.getA3());
+		mg.setWlzps(ouzhi.getAa1());
+		mg.setWlzpp(ouzhi.getAa2());
+		mg.setWlzpf(ouzhi.getAa3());
+		mg.setIcps(ouzhi.getB1());
+		mg.setIcpp(ouzhi.getB2());
+		mg.setIcpf(ouzhi.getB3());
+		mg.setIzps(ouzhi.getBb1());
+		mg.setIzpp(ouzhi.getBb2());
+		mg.setIzpf(ouzhi.getBb3());
+
+		matchesDao.updateMatches(tableName1, mg);
+	}
+
+	@RequestMapping("/initBiJia")
+	public String initBiJia() throws Exception {
+		// for (int i = 1; i < 4; i++) {
+		// this.initData("bijia", 17811, i);
+		// }
+		// this.initData("bijia", 17811, 1);
+
+		// this.updateMatches("bijia", 988158);
+		List<Integer> mids = matchesDao.selectMidFromMatches("bijia", "xijia");
+		if (mids.size() > 0) {
+			for (int i = 0; i < mids.size(); i++) {
+				this.updateMatches("bijia", mids.get(i));
+			}
+		}
+		/***
+		 * List<Integer> mids = matchesDao.selectMidFromMatches("laliga", "xijia");
+		 * 
+		 * if (mids.size() > 0) { for (int i = 0; i < mids.size(); i++) {
+		 * this.initOuZhi("xijia", mids.get(i)); this.updateMatches("xijia", "laliga",
+		 * mids.get(i)); }
+		 * 
+		 * 
+		 * }
+		 * 
+		 */
+
+		return "initData";
 	}
 
 	@RequestMapping("/initYingChao")
 	public String initYingChao() throws Exception {
-		this.initData("premier", 14789, 13);
-		List<Integer> mids = matchesDao.selectMidFromMatches("premier", "yingchao");
-
+		List<Integer> mids = matchesDao.selectMidFromMatches("yingchao", "xijia");
+		int ii = 0;
 		if (mids.size() > 0) {
 			for (int i = 0; i < mids.size(); i++) {
-				this.initOuZhi("yingchao", mids.get(i));
-				this.updateMatches("yingchao", "premier", mids.get(i));
+				this.updateMatches("yingchao", mids.get(i));
+				System.out.println(ii++);
 			}
 		}
+		// for (int i = 1; i < 39; i++) {
+		// this.initData("yingchao", 16907, i);
+		// }
 
 		return "initData";
 	}
 
 	@RequestMapping("/initYiJia")
 	public String initYiJia() throws Exception {
-		this.initData("seriea", 15160, 13);
-		List<Integer> mids = matchesDao.selectMidFromMatches("seriea", "yijia");
-
+		// for (int i = 1; i < 39; i++) {
+		// this.initData("yijia", 16967, i);
+		// }
+		List<Integer> mids = matchesDao.selectMidFromMatches("yijia", "xijia");
+		int ii = 0;
 		if (mids.size() > 0) {
 			for (int i = 0; i < mids.size(); i++) {
-				this.initOuZhi("yijia", mids.get(i));
-				this.updateMatches("yijia", "seriea", mids.get(i));
+				this.updateMatches("yijia", mids.get(i));
+				System.out.println(ii++);
 			}
 		}
-
 		return "initData";
 	}
 
 	@RequestMapping("/initXiJia")
 	public String initXiJia() throws Exception {
-		
-		
-		this.initData("laliga", 14981, 19);
-		List<Integer> mids = matchesDao.selectMidFromMatches("laliga", "xijia");
 
+		// for (int i = 1; i < 39; i++) {
+		// this.initData("xijia", 16939, i);
+		// }
+		List<Integer> mids = matchesDao.selectMidFromMatches("xijia", "xijia");
+		int ii = 0;
 		if (mids.size() > 0) {
 			for (int i = 0; i < mids.size(); i++) {
-				this.initOuZhi("xijia", mids.get(i));
-				this.updateMatches("xijia", "laliga", mids.get(i));
+				this.updateMatches("xijia", mids.get(i));
+				System.out.println(ii++);
 			}
 		}
 
@@ -370,40 +256,52 @@ public class MatchesController {
 
 	@RequestMapping("/initDeJia")
 	public String initDeJia() throws Exception {
+//		for (int i = 1; i < 39; i++) {
+//			this.initData("dejia", 16855, i);
+//		}
+		List<Integer> mids = matchesDao.selectMidFromMatches("dejia", "xijia");
+		int ii = 0;
+		if (mids.size() > 0) {
+			for (int i = 0; i < mids.size(); i++) {
+				this.updateMatches("dejia", mids.get(i));
+				System.out.println(ii++);
+			}
+		}
+		
+		return "initData";
+	}
 
+	@RequestMapping("/initPuChao")
+	public String initPuChao() throws Exception {
+//		for (int i = 1; i < 39; i++) {
+//			this.initData("puchao", 16966, i);
+//		}
+		List<Integer> mids = matchesDao.selectMidFromMatches("puchao", "xijia");
+		int ii = 0;
+		if (mids.size() > 0) {
+			for (int i = 0; i < mids.size(); i++) {
+				this.updateMatches("puchao", mids.get(i));
+				System.out.println(ii++);
+			}
+		}
 		return "initData";
 	}
 
 	// 俄超
 	@RequestMapping("/initFaJia")
 	public String initFaJia() throws Exception {
-		
-		
-		 this.initData("ligue1", 14783, 12);
-		List<Integer> mids = matchesDao.selectMidFromMatches("ligue1", "fajia");
+//		for (int i = 1; i < 39; i++) {
+//			this.initData("fajia", 16764, i);
+//		}
 
+		List<Integer> mids = matchesDao.selectMidFromMatches("fajia", "xijia");
+		int ii = 0;
 		if (mids.size() > 0) {
 			for (int i = 0; i < mids.size(); i++) {
-				this.initOuZhi("fajia", mids.get(i));
-				this.updateMatches("fajia", "ligue1", mids.get(i));
+				this.updateMatches("fajia", mids.get(i));
+				System.out.println(ii++);
 			}
 		}
-		 
-		/**
-		for (int m = 6; m < 31; m++) {
-			this.initData("ligue1", 11750, m);
-			List<Integer> mids = matchesDao.selectMidFromMatches("ligue1", "fajia");
-
-			if (mids.size() > 0) {
-				for (int i = 0; i < mids.size(); i++) {
-					this.initOuZhi("fajia", mids.get(i));
-					this.updateMatches("fajia", "ligue1", mids.get(i));
-				}
-			}
-		}
-		 * */
-	
-	
 
 		return "initData";
 	}
@@ -414,7 +312,6 @@ public class MatchesController {
 		this.initData("champions", 15276, 1);
 		this.initData("champions", 15276, 2);
 
-
 		// 欧联
 		this.initData("champions", 15296, 1);
 		this.initData("champions", 15296, 2);
@@ -424,8 +321,7 @@ public class MatchesController {
 
 		if (mids.size() > 0) {
 			for (int i = 0; i < mids.size(); i++) {
-				this.initOuZhi("europe", mids.get(i));
-				this.updateMatches("europe", "champions", mids.get(i));
+				// this.updateMatches("europe", "champions", mids.get(i));
 			}
 		}
 
@@ -439,8 +335,7 @@ public class MatchesController {
 
 		if (mids.size() > 0) {
 			for (int i = 0; i < mids.size(); i++) {
-				this.initOuZhi("country", mids.get(i));
-				this.updateMatches("country", "europecup", mids.get(i));
+				// this.updateMatches("country", "europecup", mids.get(i));
 			}
 		}
 
