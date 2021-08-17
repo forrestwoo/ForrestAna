@@ -2,6 +2,7 @@ package com.forrest.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -62,8 +63,8 @@ public class MatchesDaoImpl implements MatchesDao {
 	}
 
 	@Override
-	public List<Integer> selectMidPan() {
-		return matchesMapper.selectMidPan();
+	public List<Matches> selectMatches(@Param("tableName")String tableName) {
+		return matchesMapper.selectMatches(tableName);
 	}
 
 	@Override

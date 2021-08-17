@@ -4,7 +4,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.forrest.mapper.MatchesMapper">
 
-	<insert id="initMatches" parameterType="java.util.List">
+    <insert id="initMatches" parameterType="java.util.List">
 		insert ignore into
 		${tableName}(fid,stime,hname,gname,hscore,gscore)
 		values
@@ -14,6 +14,7 @@
 			)
 		</foreach>
 	</insert>
+	
 	
     <update id="updateMatches" parameterType="matchesGoal">
 		update ${tableName1}
@@ -50,19 +51,25 @@
 		select fid
 		from
 		${tableName1} 
+		
 	</select>
 
 	
-	<select id="selectFromMatches" resultType="matches"
+	<select id="selectMatches" resultType="com.forrest.model.Matches"
 		statementType="STATEMENT">
-		select * from ${tableName} where fid = ${mid}
+		select * from ${tableName} order by fid asc
 	</select>
 	
 	<select id="selectMatcheId" resultType="java.lang.Integer">
 		select mid
 		from tempdate
 	</select>
-
+	
+    <select id="selectFromMatches" resultType="matches"
+	        statementType="STATEMENT">
+			select * from ${tableName} where fid = ${mid}
+	</select>
+	
 	<delete id="deleteMatches" parameterType="int">
 		delete from tempdate
 		where mid = #{mid}

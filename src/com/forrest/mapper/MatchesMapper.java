@@ -23,7 +23,7 @@ public interface MatchesMapper {
 	public void initMatches(@Param("tableName")String tableName,@Param("list")List<Matches> list);
 	
 	public List<Integer> selectMidFromMatches(@Param("tableName1")String tableName1, @Param("tableName2")String tableName2);
-	public List<Integer> selectMidPan();
+	public List<Matches> selectMatches(@Param("tableName")String tableName);
 	
 	public void updateMatches(@Param("tableName1")String tableName1,@Param("mg")MatchesGoal mg);
 	
