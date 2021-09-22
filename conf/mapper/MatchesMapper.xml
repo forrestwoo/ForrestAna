@@ -57,7 +57,7 @@
 	
 	<select id="selectMatches" resultType="com.forrest.model.Matches"
 		statementType="STATEMENT">
-		select * from ${tableName} order by fid asc
+		select * from ${tableName} order by stime asc
 	</select>
 	
 	<select id="selectMatcheId" resultType="java.lang.Integer">

@@ -113,7 +113,23 @@ public class MatchesController {
 			matchesDao.initMatches(tableName, list);
 		}
 		for (int i = 0; i < list.size(); i++) {
-			Matches matches= list.get(i);
+			Matches matches = list.get(i);
+			mids.add(matches.getFid());
+		}
+		return mids;
+	}
+
+	public List<Integer> initData(@Param("tableName") String tableName, int stid, String round) throws Exception {
+		HttpClient client = HttpClients.createDefault();
+		String baseString = "https://liansai.500.com/index.php?c=score&a=getmatch&stid=";
+		String url = baseString + stid + "&round=" + round;
+		List<Matches> list = MatchesParse.getData(client, url);
+		List<Integer> mids = new ArrayList<>();
+		if (list.size() > 0) {
+			matchesDao.initMatches(tableName, list);
+		}
+		for (int i = 0; i < list.size(); i++) {
+			Matches matches = list.get(i);
 			mids.add(matches.getFid());
 		}
 		return mids;
@@ -123,9 +139,6 @@ public class MatchesController {
 		HttpClient client = HttpClients.createDefault();
 
 		Matches matches = matchesDao.selectFromMatches(tableName1, mid);
-		Document document = Jsoup.connect("http://odds.500.com/fenxi/shuju-993362.shtml").get();
-		// System.out.println(matches.getHname() + matches.getGname() +
-		// matches.getGscore());
 
 		MatchesGoal mg = new MatchesGoal();
 
@@ -185,7 +198,7 @@ public class MatchesController {
 		// this.initData("bijia", 17811, i);
 		// }
 
-		List<Integer> mids = this.initData("bijia", 17811, 4);
+		List<Integer> mids = this.initData("bijia", 17811, 8);
 		int ii = 1;
 		if (mids.size() > 0) {
 			for (int i = 0; i < mids.size(); i++) {
@@ -197,77 +210,9 @@ public class MatchesController {
 		return "initData";
 	}
 
-	@RequestMapping("/initYingChao")
-	public String initYingChao() throws Exception {
-		List<Integer> mids = this.initData("yingchao", 17793, 1);
-		int ii = 1;
-		if (mids.size() > 0) {
-			for (int i = 0; i < mids.size(); i++) {
-				this.updateMatches("yingchao", mids.get(i));
-				System.out.println(ii++);
-			}
-		}
-
-		return "initData";
-	}
-
-	@RequestMapping("/initYiJia")
-	public String initYiJia() throws Exception {
-		List<Integer> mids = this.initData("yijia", 17884, 1);
-		int ii = 1;
-		if (mids.size() > 0) {
-			for (int i = 0; i < mids.size(); i++) {
-				this.updateMatches("yijia", mids.get(i));
-				System.out.println(ii++);
-			}
-		}
-		return "initData";
-	}
-
-	@RequestMapping("/initXiJia")
-	public String initXiJia() throws Exception {
-		List<Integer> mids = this.initData("xijia", 17831, 1);
-		int ii = 1;
-		if (mids.size() > 0) {
-			for (int i = 0; i < mids.size(); i++) {
-				this.updateMatches("xijia", mids.get(i));
-				System.out.println(ii++);
-			}
-		}
-//		int ii=1;
-//		List<Matches> list = matchesDao.selectMatches("xijia");
-//		for (int i = 0; i < list.size(); i++) {
-//			Matches xijia = list.get(i);
-//
-//		if (xijia.getScore().equals("2:1") || xijia.getScore().equals("1:0")) {
-//				System.out.println(ii);
-//				ii=1;
-//			}else {
-//				++ii;
-//			}
-//			
-//		}
-
-		return "initData";
-	}
-
-	@RequestMapping("/initDeJia")
-	public String initDeJia() throws Exception {
-		List<Integer> mids = this.initData("dejia", 17800, 1);
-		int ii = 1;
-		if (mids.size() > 0) {
-			for (int i = 0; i < mids.size(); i++) {
-				this.updateMatches("dejia", mids.get(i));
-				System.out.println(ii++);
-			}
-		}
-		
-		return "initData";
-	}
-
 	@RequestMapping("/initPuChao")
 	public String initPuChao() throws Exception {
-		List<Integer> mids = this.initData("puchao", 17858, 1);
+		List<Integer> mids = this.initData("puchao", 17858, 5);
 		int ii = 1;
 		if (mids.size() > 0) {
 			for (int i = 0; i < mids.size(); i++) {
@@ -278,14 +223,104 @@ public class MatchesController {
 		return "initData";
 	}
 
-	// 俄超
-	@RequestMapping("/initFaJia")
-	public String initFaJia() throws Exception {
-		List<Integer> mids = this.initData("fajia", 17818, 2);
+	@RequestMapping("/initXiJia")
+	public String initXiJia() throws Exception {
+		List<Integer> mids = this.initData("xijia", 17831, 4);
+		int ii = 1;
+		if (mids.size() > 0) {
+			for (int j = 0; j < mids.size(); j++) {
+				this.updateMatches("xijia", mids.get(j));
+				System.out.println(ii++);
+			}
+		}
+
+		// int ii = 1;
+		// List<Matches> list = matchesDao.selectMatches("bijia");
+		// for (int i = 0; i < list.size(); i++) {
+		// Matches xijia = list.get(i);
+		//
+		// if (xijia.getScore().equals("2:1") || xijia.getScore().equals("1:0")) {
+		// System.out.println(ii);
+		// ii = 1;
+		// } else {
+		// ++ii;
+		// }
+		// }
+
+		return "initData";
+	}
+
+	@RequestMapping("/initYingChao")
+	public String initYingChao() throws Exception {
+		List<Integer> mids2 = this.initData("yingchao", 17793, 6);
+		int ii2 = 1;
+		if (mids2.size() > 0) {
+			for (int i = 0; i < mids2.size(); i++) {
+				this.updateMatches("yingchao", mids2.get(i));
+				System.out.println(ii2++);
+			}
+		}
+
+		return "initData";
+	}
+
+	@RequestMapping("/initYiJia")
+	public String initYiJia() throws Exception {
+
+		
+		List<Integer> mids1 = this.initData("yijia", 17884, 4);
+		int ii1 = 1;
+		if (mids1.size() > 0) {
+			for (int i = 0; i < mids1.size(); i++) {
+				this.updateMatches("yijia", mids1.get(i));
+				System.out.println(ii1++);
+			}
+		}
+		return "initData";
+	}
+
+	@RequestMapping("/initDanChao")
+	public String initDanChao() throws Exception {
+
+		List<Integer> mids = this.initData("danchao", 17809, 8);
 		int ii = 1;
 		if (mids.size() > 0) {
 			for (int i = 0; i < mids.size(); i++) {
-				this.updateMatches("fajia", mids.get(i));
+				this.updateMatches("danchao", mids.get(i));
+				System.out.println(ii++);
+			}
+		}
+
+		return "initData";
+	}
+
+	// 法甲
+	@RequestMapping("/initBaJia")
+	public String initBaJia() throws Exception {
+		for (int i = 1; i < 31; i++) {
+			List<Integer> mids = this.initData("bojia", 16849,i);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int j = 0; j < mids.size(); j++) {
+					this.updateMatches("bojia", mids.get(j));
+					System.out.println(ii++);
+				}
+			}
+		}
+		
+
+		return "initData";
+	}
+
+	// 欧冠
+	@RequestMapping("/initOuGuan")
+	public String initOuGuan() throws Exception {
+
+		List<Integer> mids = this.initData("ouguan", 14456, 1);
+		int ii = 1;
+		if (mids.size() > 0) {
+			for (int i = 0; i < mids.size(); i++) {
+				this.updateMatches("ouguan", mids.get(i));
 				System.out.println(ii++);
 			}
 		}
@@ -295,21 +330,23 @@ public class MatchesController {
 
 	@RequestMapping("/initEurope")
 	public String initEurope() throws Exception {
-		// 欧冠
-		this.initData("champions", 15276, 1);
-		this.initData("champions", 15276, 2);
+		int ii = 1;
+		List<Matches> list = matchesDao.selectMatches("xijia");
+		for (int i = 0; i < list.size(); i++) {
+			Matches xijia = list.get(i);
 
-		// 欧联
-		this.initData("champions", 15296, 1);
-		this.initData("champions", 15296, 2);
-		this.initData("champions", 15180, 1);
-		this.initData("champions", 15180, 2);
-		List<Integer> mids = matchesDao.selectMidFromMatches("champions", "europe");
-
-		if (mids.size() > 0) {
-			for (int i = 0; i < mids.size(); i++) {
-				// this.updateMatches("europe", "champions", mids.get(i));
+			if (xijia.getResult().equals("胜") && Float.parseFloat(xijia.getWlcps()) < Float.parseFloat(xijia.getWlcpf())
+					|| xijia.getResult().equals("负")
+							&& Float.parseFloat(xijia.getWlcps()) > Float.parseFloat(xijia.getWlcpf())) {
+				// System.out.println("热门打出" + ii);
+				if (ii > 4) {
+					System.out.println("热门间隔" + ii);
+				}
+				ii = 1;
+			} else {
+				++ii;
 			}
+
 		}
 
 		return "initData";
@@ -317,13 +354,21 @@ public class MatchesController {
 
 	@RequestMapping("/initConutry")
 	public String initConutry() throws Exception {
-		this.initData("europecup", 13207, 38);
-		List<Integer> mids = matchesDao.selectMidFromMatches("europecup", "country");
+		int ii = 1;
+		List<Matches> list = matchesDao.selectMatches("xijia");
+		for (int i = 0; i < list.size(); i++) {
+			Matches xijia = list.get(i);
 
-		if (mids.size() > 0) {
-			for (int i = 0; i < mids.size(); i++) {
-				// this.updateMatches("country", "europecup", mids.get(i));
+			if (Float.parseFloat(xijia.getWlcps()) < Float.parseFloat(xijia.getWlcpf())
+					&& !xijia.getResult().equals("胜")
+					|| Float.parseFloat(xijia.getWlcps()) > Float.parseFloat(xijia.getWlcpf())
+							&& !xijia.getResult().equals("负")) {
+				System.out.println("冷门" + ii);
+				ii = 1;
+			} else {
+				++ii;
 			}
+
 		}
 
 		return "initData";
