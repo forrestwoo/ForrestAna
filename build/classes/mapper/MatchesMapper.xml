@@ -15,7 +15,6 @@
 		</foreach>
 	</insert>
 	
-	
     <update id="updateMatches" parameterType="matchesGoal">
 		update ${tableName1}
 		<set>
@@ -42,6 +41,8 @@
 			<if test="mg.idxp != null">idxp=#{mg.idxp},</if>
 			<if test="mg.idxpd != null">idxpd=#{mg.idxpd},</if>
 			<if test="mg.idxpx != null">idxpx=#{mg.idxpx},</if>
+			<if test="mg.wlcode != null">wlcode=#{mg.wlcode},</if>
+			<if test="mg.wlcode_result != null">wlcode_result=#{mg.wlcode_result},</if>
 		</set>
 		where fid=${mg.mid}
 	</update>

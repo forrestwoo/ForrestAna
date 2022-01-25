@@ -147,6 +147,7 @@ public class MatchesController {
 		MatchesGoal mg = new MatchesGoal();
 
 		// 基本比赛数据
+		//wlcode  wlcode_result
 		mg.setMid(mid);
 		mg.setScore(matches.getHscore() + ":" + matches.getGscore());
 		int z = matches.getHscore();
@@ -178,7 +179,6 @@ public class MatchesController {
 			mg.setIdxpd(daxiaoqiu.getAa1());
 			mg.setIdxpx(daxiaoqiu.getAa3());
 		}
-		// http://odds.500.com/fenxi/ouzhi-988158.shtml
 		String ou = "http://odds.500.com/fenxi/ouzhi-" + mid + ".shtml";
 		OuZhi ouzhi = MatchesParse.getOuZhiData(client, ou, mid);
 		mg.setWlcps(ouzhi.getA1());
@@ -196,15 +196,59 @@ public class MatchesController {
 
 		matchesDao.updateMatches(tableName1, mg);
 	}
+	
+	public void createMatchesAnays(@Param("tableName1") String tableName1, int mid) throws Exception {
+		HttpClient client = HttpClients.createDefault();
+
+		Matches matches = matchesDao.selectFromMatches(tableName1, mid);
+
+		MatchesGoal mg = new MatchesGoal();
+
+		// 基本比赛数据
+		//wlcode  wlcode_result
+		mg.setMid(mid);
+		
+	}
+	
 
 	@RequestMapping("/initBiJia")
 	public String initBiJia() throws Exception {
-		 for (int i = 13; i < 17; i++) {
-				List<Integer> mids = this.initData("bijia", 17811, i);
+		 for (int i = 1; i < 35; i++) {
+				List<Integer> mids = this.initData("bijia_snai", 16827, i);
 				int ii = 1;
 				if (mids.size() > 0) {
 					for (int j = 0; j < mids.size(); j++) {
-						this.updateMatches("bijia", mids.get(j));
+						this.updateMatches("bijia_snai", mids.get(j));
+						System.out.println("i"+ii++);
+					}
+				}
+		 }
+		 for (int i = 1; i < 30; i++) {
+				List<Integer> mids = this.initData("bijia_snai", 14945, i);
+				int ii = 1;
+				if (mids.size() > 0) {
+					for (int j = 0; j < mids.size(); j++) {
+						this.updateMatches("bijia_snai", mids.get(j));
+						System.out.println("i"+ii++);
+					}
+				}
+		 }
+		 for (int i = 1; i < 31; i++) {
+				List<Integer> mids = this.initData("bijia_snai", 13083, i);
+				int ii = 1;
+				if (mids.size() > 0) {
+					for (int j = 0; j < mids.size(); j++) {
+						this.updateMatches("bijia_snai", mids.get(j));
+						System.out.println("i"+ii++);
+					}
+				}
+		 }
+		 for (int i = 1; i < 18; i++) {
+				List<Integer> mids = this.initData("bijia_snai", 17811, i);
+				int ii = 1;
+				if (mids.size() > 0) {
+					for (int j = 0; j < mids.size(); j++) {
+						this.updateMatches("bijia_snai", mids.get(j));
 						System.out.println("i"+ii++);
 					}
 				}
@@ -231,43 +275,66 @@ public class MatchesController {
 		return "initData";
 	}
 
+	//西甲看威廉和inter
 	@RequestMapping("/initXiJia")
 	public String initXiJia() throws Exception {
-		for (int i = 8; i < 16; i++) {
-			List<Integer> mids = this.initData("xijia", 17831, i);
+		for (int i = 1; i < 39; i++) {
+			List<Integer> mids = this.initData("xijia_a", 16939, i);
 			int ii = 1;
 			if (mids.size() > 0) {
 				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("xijia", mids.get(j));
+					this.updateMatches("xijia_a", mids.get(j));
+					System.out.println(ii++);
+				}
+			}
+		}
+		
+		for (int i = 1; i < 39; i++) {
+			List<Integer> mids = this.initData("xijia_a", 14981, i);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int j = 0; j < mids.size(); j++) {
+					this.updateMatches("xijia_a", mids.get(j));
+					System.out.println(ii++);
+				}
+			}
+		}
+		
+		for (int i = 1; i < 39; i++) {
+			List<Integer> mids = this.initData("xijia_a", 13195, i);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int j = 0; j < mids.size(); j++) {
+					this.updateMatches("xijia_a", mids.get(j));
+					System.out.println(ii++);
+				}
+			}
+		}
+		
+		for (int i = 1; i < 21; i++) {
+			List<Integer> mids = this.initData("xijia_a", 17831, i);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int j = 0; j < mids.size(); j++) {
+					this.updateMatches("xijia_a", mids.get(j));
 					System.out.println(ii++);
 				}
 			}
 		}
 
-		// int ii = 1;
-		// List<Matches> list = matchesDao.selectMatches("bijia");
-		// for (int i = 0; i < list.size(); i++) {
-		// Matches xijia = list.get(i);
-		//
-		// if (xijia.getScore().equals("2:1") || xijia.getScore().equals("1:0")) {
-		// System.out.println(ii);
-		// ii = 1;
-		// } else {
-		// ++ii;
-		// }
-		// }
-
 		return "initData";
 	}
 
+	//英超看威廉和BET365
 	@RequestMapping("/initYingChao")
 	public String initYingChao() throws Exception {
-		for (int i =7; i < 14; i++) {
-			List<Integer> mids = this.initData("yingchao", 17793, i);
+		
+		for (int i =1; i < 17; i++) {
+			List<Integer> mids = this.initData("yingchao_lb", 17793, i);
 			int ii = 1;
 			if (mids.size() > 0) {
 				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("yingchao", mids.get(j));
+					this.updateMatches("yingchao_lb", mids.get(j));
 					System.out.println(ii++);
 				}
 			}
@@ -275,30 +342,71 @@ public class MatchesController {
 
 		return "initData";
 	}
-
+//意甲看威廉和SNAI
 	@RequestMapping("/initYiJia")
 	public String initYiJia() throws Exception {
-		for (int i = 8; i < 15; i++) {
-			List<Integer> mids = this.initData("yijia", 17884, i);
+//		for (int i =1; i < 17; i++) {
+//			List<Integer> mids = this.initData("yijia_snai", 17884, i);
+//			int ii = 1;
+//			if (mids.size() > 0) {
+//				for (int j = 0; j < mids.size(); j++) {
+//					this.updateMatches("yijia_snai", mids.get(j));
+//					System.out.println( mids.get(j));
+//				}
+//			}
+//		}
+		for (int i =27; i < 39; i++) {
+			List<Integer> mids = this.initData("yijia_snai", 13207, i);
 			int ii = 1;
 			if (mids.size() > 0) {
 				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("yijia", mids.get(j));
+					this.updateMatches("yijia_snai", mids.get(j));
 					System.out.println( mids.get(j));
 				}
 			}
 		}
 		
-		
 
 		return "initData";
 	}
 
+	//德甲看威廉和BWIN
 	@RequestMapping("/initDeJia")
 	public String initDeJia() throws Exception {
-
-		for (int i = 1; i < 15; i++) {
+		for (int i = 1; i < 19; i++) {
 			List<Integer> mids = this.initData("dejia", 17800, i);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int j = 0; j < mids.size(); j++) {
+					this.updateMatches("dejia", mids.get(j));
+					System.out.println(ii++);
+				}
+			}
+		}
+		for (int i = 1; i < 35; i++) {
+			List<Integer> mids = this.initData("dejia", 16855, i);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int j = 0; j < mids.size(); j++) {
+					this.updateMatches("dejia", mids.get(j));
+					System.out.println(ii++);
+				}
+			}
+		}
+		
+		for (int i = 1; i < 35; i++) {
+			List<Integer> mids = this.initData("dejia", 14917, i);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int j = 0; j < mids.size(); j++) {
+					this.updateMatches("dejia", mids.get(j));
+					System.out.println(ii++);
+				}
+			}
+		}
+		
+		for (int i = 1; i < 35; i++) {
+			List<Integer> mids = this.initData("dejia", 13109, i);
 			int ii = 1;
 			if (mids.size() > 0) {
 				for (int j = 0; j < mids.size(); j++) {
@@ -311,12 +419,44 @@ public class MatchesController {
 		return "initData";
 	}
 
-	// 法甲
+	// 法甲威廉和立博
 	@RequestMapping("/initFaJia")
 	public String initFaJia() throws Exception {
-
+		
 		for (int i = 1; i < 39; i++) {
-			List<Integer> mids = this.initData("fajia", 9854, i);
+			List<Integer> mids = this.initData("fajia", 13051, i);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int j = 0; j < mids.size(); j++) {
+					this.updateMatches("fajia", mids.get(j));
+					System.out.println(ii++);
+				}
+			}
+		}
+		for (int i = 1; i < 29; i++) {
+			List<Integer> mids = this.initData("fajia", 14803, i);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int j = 0; j < mids.size(); j++) {
+					this.updateMatches("fajia", mids.get(j));
+					System.out.println(ii++);
+				}
+			}
+		}
+		
+		for (int i = 1; i < 39; i++) {
+			List<Integer> mids = this.initData("fajia", 16764, i);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int j = 0; j < mids.size(); j++) {
+					this.updateMatches("fajia", mids.get(j));
+					System.out.println(ii++);
+				}
+			}
+		}
+		
+		for (int i = 1; i < 20; i++) {
+			List<Integer> mids = this.initData("fajia", 17818, i);
 			int ii = 1;
 			if (mids.size() > 0) {
 				for (int j = 0; j < mids.size(); j++) {
@@ -328,37 +468,48 @@ public class MatchesController {
 
 		return "initData";
 	}
-	
+	//克罗地亚甲
 	@RequestMapping("/initHeJia")
 	public String initHeJia() throws Exception {
-		for (int i = 1; i < 35; i++) {
-			List<Integer> mids = this.initData("hejia", 13071, i);
+		for (int i = 1; i < 37; i++) {
+			List<Integer> mids = this.initData("kejia", 13084, i);
 			int ii = 1;
 			if (mids.size() > 0) {
 				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("hejia", mids.get(j));
+					this.updateMatches("kejia", mids.get(j));
 					System.out.println(ii++);
 				}
 			}
 		}
 		
-		for (int i = 1; i < 27; i++) {
-			List<Integer> mids = this.initData("hejia", 14805, i);
+		for (int i = 1; i < 37; i++) {
+			List<Integer> mids = this.initData("kejia", 14861, i);
 			int ii = 1;
 			if (mids.size() > 0) {
 				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("hejia", mids.get(j));
+					this.updateMatches("kejia", mids.get(j));
 					System.out.println(ii++);
 				}
 			}
 		}
 		
-		for (int i = 1; i < 35; i++) {
-			List<Integer> mids = this.initData("hejia", 17794, i);
+		for (int i = 1; i < 37; i++) {
+			List<Integer> mids = this.initData("kejia", 16859, i);
 			int ii = 1;
 			if (mids.size() > 0) {
 				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("hejia", mids.get(j));
+					this.updateMatches("kejia", mids.get(j));
+					System.out.println(ii++);
+				}
+			}
+		}
+		
+		for (int i = 1; i < 21; i++) {
+			List<Integer> mids = this.initData("kejia", 17801, i);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int j = 0; j < mids.size(); j++) {
+					this.updateMatches("kejia", mids.get(j));
 					System.out.println(ii++);
 				}
 			}
@@ -366,6 +517,56 @@ public class MatchesController {
 
 		return "initData";
 	}
+	
+	//克罗地亚甲
+		@RequestMapping("/initXiongJia")
+		public String initXiongJia() throws Exception {
+			for (int i = 1; i < 34; i++) {
+				List<Integer> mids = this.initData("xiongjia", 13113, i);
+				int ii = 1;
+				if (mids.size() > 0) {
+					for (int j = 0; j < mids.size(); j++) {
+						this.updateMatches("xiongjia", mids.get(j));
+						System.out.println(ii++);
+					}
+				}
+			}
+			
+			for (int i = 1; i < 34; i++) {
+				List<Integer> mids = this.initData("xiongjia", 14921, i);
+				int ii = 1;
+				if (mids.size() > 0) {
+					for (int j = 0; j < mids.size(); j++) {
+						this.updateMatches("xiongjia", mids.get(j));
+						System.out.println(ii++);
+					}
+				}
+			}
+			
+			for (int i = 1; i < 34; i++) {
+				List<Integer> mids = this.initData("xiongjia", 16830, i);
+				int ii = 1;
+				if (mids.size() > 0) {
+					for (int j = 0; j < mids.size(); j++) {
+						this.updateMatches("xiongjia", mids.get(j));
+						System.out.println(ii++);
+					}
+				}
+			}
+			
+			for (int i = 1; i < 18; i++) {
+				List<Integer> mids = this.initData("xiongjia", 17805, i);
+				int ii = 1;
+				if (mids.size() > 0) {
+					for (int j = 0; j < mids.size(); j++) {
+						this.updateMatches("xiongjia", mids.get(j));
+						System.out.println(ii++);
+					}
+				}
+			}
+
+			return "initData";
+		}
 
 	// 欧冠
 	@RequestMapping("/initOuGuan")
@@ -462,11 +663,17 @@ public class MatchesController {
 		for (int i = 0; i < list.size(); i++) {
 			Matches xijia = list.get(i);
 
-			if (Float.parseFloat(xijia.getWlcps()) < Float.parseFloat(xijia.getWlcpf())
-					&& !xijia.getResult().equals("胜")
-					|| Float.parseFloat(xijia.getWlcps()) > Float.parseFloat(xijia.getWlcpf())
-							&& !xijia.getResult().equals("负")) {
+			if (Float.parseFloat(xijia.getWlcps()) > Float.parseFloat(xijia.getWlcpf())
+					&& Float.parseFloat(xijia.getWlcpp()) < Float.parseFloat(xijia.getWlcps())&& Float.parseFloat(xijia.getWlcpf())>2.5) {
 				System.out.println("冷门" + ii);
+				//de==搜索符合条件的比赛，然后
+			 String hName=xijia.getHname();
+			 String gName=xijia.getGname();
+			 for (int j = 0; j < list.size(); j++) {
+				if (list.get(j).getHname().equals(hName)) {
+					
+				}
+			}
 				ii = 1;
 			} else {
 				++ii;

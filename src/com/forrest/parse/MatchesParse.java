@@ -178,7 +178,7 @@ public class MatchesParse {
 
 		Document doc = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
 		Elements elementsWL = doc.select("tr[id=293]");
-		Elements elementsIN = doc.select("tr[id=4]");
+		Elements elementsIN = doc.select("tr[id=2]");
 
 		if (elementsWL.size() > 0) {
 			Element element = elementsWL.get(0);

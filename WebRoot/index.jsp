@@ -278,14 +278,16 @@
 									class="fa fa-circle-o"></i>法甲数据</a></li>
 							<li><a href="initPuChao" target="menuFrame"><i
 									class="fa fa-circle-o"></i>葡超数据</a></li>
-										<li><a href="initHeJia" target="menuFrame"><i
-									class="fa fa-circle-o"></i>荷甲数据</a></li>
+							<li><a href="initHeJia" target="menuFrame"><i
+									class="fa fa-circle-o"></i>克甲数据</a></li>
+									<li><a href="initXiongJia" target="menuFrame"><i
+									class="fa fa-circle-o"></i>匈甲数据</a></li>
 							<li><a href="initOuGuan" target="menuFrame"><i
 									class="fa fa-circle-o"></i>欧冠数据</a></li>
 							<li><a href="initEurope" target="menuFrame"><i
-									class="fa fa-circle-o"></i>统计数据</a></li>
+									class="fa fa-circle-o"></i>欧洲数据</a></li>
 							<li><a href="initConutry" target="menuFrame"><i
-									class="fa fa-circle-o"></i>统计数据</a></li>
+									class="fa fa-circle-o"></i>国家数据</a></li>
 						</ul></li>
 				</ul>
 				<!-- /.sidebar-menu -->

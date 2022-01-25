@@ -33,6 +33,10 @@ public class MatchesGoal {
 	private String idxp;
 	private String idxpd;
 	private String idxpx;
+	
+	private String wlcode;
+	private String wlcode_result;
+	
 	public int getMid() {
 		return mid;
 	}
@@ -176,5 +180,17 @@ public class MatchesGoal {
 	}
 	public void setIdxpx(String idxpx) {
 		this.idxpx = idxpx;
+	}
+	public String getWlcode() {
+		return wlcode;
+	}
+	public void setWlcode(String wlcode) {
+		this.wlcode = wlcode;
+	}
+	public String getWlcode_result() {
+		return wlcode_result;
+	}
+	public void setWlcode_result(String wlcode_result) {
+		this.wlcode_result = wlcode_result;
 	}
 }
