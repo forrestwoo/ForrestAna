@@ -134,7 +134,7 @@ public class MatchesParse {
 	public static YaPan getYaPanData(HttpClient client, String url, Integer mid) throws Exception {
 		Document document = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
 
-		Elements elements = document.select("tr[id=4]");
+		Elements elements = document.select("tr[id=3]");
 
 		YaPan yaPan = new YaPan();
 		yaPan.setMid(mid);
@@ -156,7 +156,7 @@ public class MatchesParse {
 	public static YaPan getDaXiaoData(HttpClient client, String url, Integer mid) throws Exception {
 		Document document = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
 
-		Elements elements = document.select("tr[id=4]");
+		Elements elements = document.select("tr[id=3]");
 
 		YaPan yaPan = new YaPan();
 		yaPan.setMid(mid);
@@ -178,7 +178,7 @@ public class MatchesParse {
 
 		Document doc = Jsoup.parse(HTTPUtils.getHTMLData(client, url));
 		Elements elementsWL = doc.select("tr[id=293]");
-		Elements elementsIN = doc.select("tr[id=2]");
+		Elements elementsIN = doc.select("tr[id=4]");
 
 		if (elementsWL.size() > 0) {
 			Element element = elementsWL.get(0);

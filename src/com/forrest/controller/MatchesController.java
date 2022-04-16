@@ -213,47 +213,17 @@ public class MatchesController {
 
 	@RequestMapping("/initBiJia")
 	public String initBiJia() throws Exception {
-		 for (int i = 1; i < 35; i++) {
-				List<Integer> mids = this.initData("bijia_snai", 16827, i);
-				int ii = 1;
-				if (mids.size() > 0) {
-					for (int j = 0; j < mids.size(); j++) {
-						this.updateMatches("bijia_snai", mids.get(j));
-						System.out.println("i"+ii++);
-					}
-				}
-		 }
-		 for (int i = 1; i < 30; i++) {
-				List<Integer> mids = this.initData("bijia_snai", 14945, i);
-				int ii = 1;
-				if (mids.size() > 0) {
-					for (int j = 0; j < mids.size(); j++) {
-						this.updateMatches("bijia_snai", mids.get(j));
-						System.out.println("i"+ii++);
-					}
-				}
-		 }
-		 for (int i = 1; i < 31; i++) {
-				List<Integer> mids = this.initData("bijia_snai", 13083, i);
-				int ii = 1;
-				if (mids.size() > 0) {
-					for (int j = 0; j < mids.size(); j++) {
-						this.updateMatches("bijia_snai", mids.get(j));
-						System.out.println("i"+ii++);
-					}
-				}
-		 }
-		 for (int i = 1; i < 18; i++) {
-				List<Integer> mids = this.initData("bijia_snai", 17811, i);
-				int ii = 1;
-				if (mids.size() > 0) {
-					for (int j = 0; j < mids.size(); j++) {
-						this.updateMatches("bijia_snai", mids.get(j));
-						System.out.println("i"+ii++);
-					}
-				}
-		 }
 
+		 for (int i = 32; i < 35; i++) {
+				List<Integer> mids = this.initData("bijia", 17811, i);
+				int ii = 1;
+				if (mids.size() > 0) {
+					for (int j = 0; j < mids.size(); j++) {
+						this.updateMatches("bijia", mids.get(j));
+						System.out.println("i"+ii++);
+					}
+				}
+		 }
 
 
 		return "initData";
@@ -261,7 +231,7 @@ public class MatchesController {
 
 	@RequestMapping("/initPuChao")
 	public String initPuChao() throws Exception {
-		for (int j = 8; j < 13; j++) {
+		for (int j = 27; j < 30; j++) {
 			List<Integer> mids = this.initData("puchao", 17858, j);
 			int ii = 1;
 			if (mids.size() > 0) {
@@ -274,49 +244,32 @@ public class MatchesController {
 		
 		return "initData";
 	}
+	
+	@RequestMapping("/initBaiChao")
+	public String initBaiChao() throws Exception {
+		for (int j = 1; j < 4; j++) {
+			List<Integer> mids = this.initData("bc", 18489, j);
+			int ii = 1;
+			if (mids.size() > 0) {
+				for (int i = 0; i < mids.size(); i++) {
+					this.updateMatches("bc", mids.get(i));
+					System.out.println(ii++);
+				}
+			}
+		}
+		
+		return "initData";
+	}
 
 	//西甲看威廉和inter
 	@RequestMapping("/initXiJia")
 	public String initXiJia() throws Exception {
-		for (int i = 1; i < 39; i++) {
-			List<Integer> mids = this.initData("xijia_a", 16939, i);
+		for (int i = 29; i < 32; i++) {
+			List<Integer> mids = this.initData("xijia", 17831, i);
 			int ii = 1;
 			if (mids.size() > 0) {
 				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("xijia_a", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
-		
-		for (int i = 1; i < 39; i++) {
-			List<Integer> mids = this.initData("xijia_a", 14981, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("xijia_a", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
-		
-		for (int i = 1; i < 39; i++) {
-			List<Integer> mids = this.initData("xijia_a", 13195, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("xijia_a", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
-		
-		for (int i = 1; i < 21; i++) {
-			List<Integer> mids = this.initData("xijia_a", 17831, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("xijia_a", mids.get(j));
+					this.updateMatches("xijia", mids.get(j));
 					System.out.println(ii++);
 				}
 			}
@@ -329,12 +282,12 @@ public class MatchesController {
 	@RequestMapping("/initYingChao")
 	public String initYingChao() throws Exception {
 		
-		for (int i =1; i < 17; i++) {
-			List<Integer> mids = this.initData("yingchao_lb", 17793, i);
+		for (int i =17; i < 33; i++) {
+			List<Integer> mids = this.initData("yingchao", 17793, i);
 			int ii = 1;
 			if (mids.size() > 0) {
 				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("yingchao_lb", mids.get(j));
+					this.updateMatches("yingchao", mids.get(j));
 					System.out.println(ii++);
 				}
 			}
@@ -345,27 +298,15 @@ public class MatchesController {
 //意甲看威廉和SNAI
 	@RequestMapping("/initYiJia")
 	public String initYiJia() throws Exception {
-//		for (int i =1; i < 17; i++) {
-//			List<Integer> mids = this.initData("yijia_snai", 17884, i);
-//			int ii = 1;
-//			if (mids.size() > 0) {
-//				for (int j = 0; j < mids.size(); j++) {
-//					this.updateMatches("yijia_snai", mids.get(j));
-//					System.out.println( mids.get(j));
-//				}
-//			}
-//		}
-		for (int i =27; i < 39; i++) {
-			List<Integer> mids = this.initData("yijia_snai", 13207, i);
-			int ii = 1;
+		for (int i =30; i < 33; i++) {
+			List<Integer> mids = this.initData("yijia", 17884, i);
 			if (mids.size() > 0) {
 				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("yijia_snai", mids.get(j));
+					this.updateMatches("yijia", mids.get(j));
 					System.out.println( mids.get(j));
 				}
 			}
 		}
-		
 
 		return "initData";
 	}
@@ -373,7 +314,7 @@ public class MatchesController {
 	//德甲看威廉和BWIN
 	@RequestMapping("/initDeJia")
 	public String initDeJia() throws Exception {
-		for (int i = 1; i < 19; i++) {
+		for (int i = 26; i < 30; i++) {
 			List<Integer> mids = this.initData("dejia", 17800, i);
 			int ii = 1;
 			if (mids.size() > 0) {
@@ -383,39 +324,6 @@ public class MatchesController {
 				}
 			}
 		}
-		for (int i = 1; i < 35; i++) {
-			List<Integer> mids = this.initData("dejia", 16855, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("dejia", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
-		
-		for (int i = 1; i < 35; i++) {
-			List<Integer> mids = this.initData("dejia", 14917, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("dejia", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
-		
-		for (int i = 1; i < 35; i++) {
-			List<Integer> mids = this.initData("dejia", 13109, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("dejia", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
-
 		return "initData";
 	}
 
@@ -423,39 +331,7 @@ public class MatchesController {
 	@RequestMapping("/initFaJia")
 	public String initFaJia() throws Exception {
 		
-		for (int i = 1; i < 39; i++) {
-			List<Integer> mids = this.initData("fajia", 13051, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("fajia", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
-		for (int i = 1; i < 29; i++) {
-			List<Integer> mids = this.initData("fajia", 14803, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("fajia", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
-		
-		for (int i = 1; i < 39; i++) {
-			List<Integer> mids = this.initData("fajia", 16764, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("fajia", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
-		
-		for (int i = 1; i < 20; i++) {
+		for (int i = 28; i < 32; i++) {
 			List<Integer> mids = this.initData("fajia", 17818, i);
 			int ii = 1;
 			if (mids.size() > 0) {
@@ -471,40 +347,8 @@ public class MatchesController {
 	//克罗地亚甲
 	@RequestMapping("/initHeJia")
 	public String initHeJia() throws Exception {
-		for (int i = 1; i < 37; i++) {
-			List<Integer> mids = this.initData("kejia", 13084, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("kejia", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
 		
-		for (int i = 1; i < 37; i++) {
-			List<Integer> mids = this.initData("kejia", 14861, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("kejia", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
-		
-		for (int i = 1; i < 37; i++) {
-			List<Integer> mids = this.initData("kejia", 16859, i);
-			int ii = 1;
-			if (mids.size() > 0) {
-				for (int j = 0; j < mids.size(); j++) {
-					this.updateMatches("kejia", mids.get(j));
-					System.out.println(ii++);
-				}
-			}
-		}
-		
-		for (int i = 1; i < 21; i++) {
+		for (int i = 27; i < 31; i++) {
 			List<Integer> mids = this.initData("kejia", 17801, i);
 			int ii = 1;
 			if (mids.size() > 0) {
@@ -518,43 +362,11 @@ public class MatchesController {
 		return "initData";
 	}
 	
-	//克罗地亚甲
+	//匈牙利甲
 		@RequestMapping("/initXiongJia")
 		public String initXiongJia() throws Exception {
-			for (int i = 1; i < 34; i++) {
-				List<Integer> mids = this.initData("xiongjia", 13113, i);
-				int ii = 1;
-				if (mids.size() > 0) {
-					for (int j = 0; j < mids.size(); j++) {
-						this.updateMatches("xiongjia", mids.get(j));
-						System.out.println(ii++);
-					}
-				}
-			}
 			
-			for (int i = 1; i < 34; i++) {
-				List<Integer> mids = this.initData("xiongjia", 14921, i);
-				int ii = 1;
-				if (mids.size() > 0) {
-					for (int j = 0; j < mids.size(); j++) {
-						this.updateMatches("xiongjia", mids.get(j));
-						System.out.println(ii++);
-					}
-				}
-			}
-			
-			for (int i = 1; i < 34; i++) {
-				List<Integer> mids = this.initData("xiongjia", 16830, i);
-				int ii = 1;
-				if (mids.size() > 0) {
-					for (int j = 0; j < mids.size(); j++) {
-						this.updateMatches("xiongjia", mids.get(j));
-						System.out.println(ii++);
-					}
-				}
-			}
-			
-			for (int i = 1; i < 18; i++) {
+			for (int i = 24; i < 28; i++) {
 				List<Integer> mids = this.initData("xiongjia", 17805, i);
 				int ii = 1;
 				if (mids.size() > 0) {

@@ -273,7 +273,7 @@
 							<li><a href="initPuChao" target="menuFrame"><i
 									class="fa fa-circle-o"></i>葡超数据</a></li>
 							<li><a href=initDeJia target="menuFrame"><i
-									class="fa fa-circle-o"></i>德甲数据</a></li>
+									class="fa fa-circle-o"></i>白超数据</a></li>
 							<li><a href="initFaJia" target="menuFrame"><i
 									class="fa fa-circle-o"></i>法甲数据</a></li>
 							<li><a href="initPuChao" target="menuFrame"><i
@@ -288,6 +288,8 @@
 									class="fa fa-circle-o"></i>欧洲数据</a></li>
 							<li><a href="initConutry" target="menuFrame"><i
 									class="fa fa-circle-o"></i>国家数据</a></li>
+									<li><a href="initBaiChao" target="menuFrame"><i
+									class="fa fa-circle-o"></i>白超数据</a></li>
 						</ul></li>
 				</ul>
 				<!-- /.sidebar-menu -->
